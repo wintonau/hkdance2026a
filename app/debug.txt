@@ -1,0 +1,46 @@
+d100Init={}
+dNot100Init={}
+userShowAllowed={2304,2305,2306,2307,2308,2309,2206,2301,2302,2303}
+hkdanceDataIO.ReadVarLabelValue(d100Init, dNot100Init)
+firsttimeListDisplay=set()
+firsttimeListAAA=set()
+firsttimeListBBB=set()
+firsttimeFullList=set()
+showList=set()
+showFullList=set()
+
+for firsttimedx in d100Init['firsttime']['optList']:
+	firsttimeFullList.add(firsttimedx)
+firsttimeFullList.discard(hkdanceDataIO.MISSINGDATAVALUE)
+
+for showdx in d100Init['show']['optList']:
+	showFullList.add(showdx)
+showFullList.discard(hkdanceDataIO.MISSINGDATAVALUE)
+
+data=hkdanceDataIO.ReadDataFromLocal()
+dict100FullFull=hkdanceDataIO.ExtractData100(data, userShowAllowed, firsttimeFullList, d100Init)
+sampleSizeFull=hkdanceDataIO.SampleSize(data, showList, firsttimeFullList)
+
+dict100Full=dict100FullFull
+dictNot100Full=hkdanceDataIO.ExtractDataNot100(data, userShowAllowed, firsttimeFullList, dNot100Init)
+thisTitleFull="全部"+" (" + str(hkdanceDataIO.SampleSize(data, userShowAllowed, firsttimeFullList))+")"
+
+dict100AAA=dict100Full
+dictNot100AAA=dictNot100Full
+sampleSizeAAA=hkdanceDataIO.SampleSize(data, userShowAllowed, firsttimeFullList)
+showNameAAA = hkdanceDataIO.GenerateGroupTitle("firsttime", firsttimeFullList, d100Init)
+thisTitleAAA=thisTitleFull
+
+dict100BBB=dict100Full
+dictNot100BBB=dictNot100Full
+sampleSizeBBB=hkdanceDataIO.SampleSize(data, userShowAllowed, firsttimeFullList)
+showNameBBB = hkdanceDataIO.GenerateGroupTitle("firsttime", firsttimeFullList, d100Init)
+thisTitleBBB=thisTitleFull
+
+listComment = hkdanceDataIO.ExtractComment(data, userShowAllowed, firsttimeFullList)
+
+for firsttimedx in d100Init['firsttime']['optList']:
+	firsttimeFullList.add(firsttimedx)
+firsttimeFullList.discard(hkdanceDataIO.MISSINGDATAVALUE)
+firsttimeList=firsttimeFullList
+showList=userShowAllowed

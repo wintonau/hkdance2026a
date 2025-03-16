@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='NotoSansCJKtc-Black-normal.js') }}" ></script>
+<style>
+* {
+	box-sizing: border-box;
+	border : 10px;
+	border-radius: 25px;
+
+	}
+body {
+	background-color: white;
+	}
+
+h2 {
+	color: IndianRed;
+	text-align: center;
+	}
+
+p {
+	font-family: verdana;
+	font-size: 14px;
+	}
+.centerHKDANCEImage {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 300px
+	}
+.checkboxtext
+	{
+	  /* Checkbox text */
+	  font-size: 100%;
+	  display: inline;
+	}
+.row {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:20px;
+	display: flex;
+	flex-wrap: wrap;
+	}
+.row > .column {
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+	background-color: #f1f1f1;
+	width: 400px;
+    margin-top:20px;
+	text-align: left;
+	float: left;
+    padding:50px;
+	}
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+	}
+.multiChartContainer {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+	display: flex;
+	flex-wrap: wrap;
+	}
+.multiChartContainer > .colChartContainer {
+	background-color: #f1f1f1;
+	max-width:700px;
+	width:100%;
+	height : 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:20px;
+  	background-color: #f1f1f1;
+	text-align: center;
+    padding: 10px 50px 100px 35px;
+	}
+.multiChartContainer > .colChartContainerTall {
+	background-color: #f1f1f1;
+	max-width:700px;
+	width:100%;
+	height : 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:20px;
+  	background-color: #f1f1f1;
+	text-align: center;
+    padding: 10px 50px 100px 35px;
+	}
+.multiChartContainer > .rowChartContainer {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:20px;
+	background-color: #f1f1f1;
+	width:100%;
+	height : 500px;
+	text-align: center;
+    padding: 10px 50px 100px 35px;
+	}
+.multiChartContainer > .rowChartContainerTall {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:20px;
+	background-color: #f1f1f1;
+	width:100%;
+	height : 1000px;
+	text-align: center;
+    padding: 10px 50px 100px 35px;
+	}
+.comments {
+	background-color: #f1f1f1;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:20px;
+	width:100%;
+	//margin: 20px;
+	text-align: left;
+    padding: 25px
+	}
+.button {
+    background-color:#f5d6d6;
+   	font-family: verdana;
+   	font-size: 14px;
+    }
+.button:hover {
+    background-color:#ebadad;
+    }
+</style>
+</head>
+
+<body>
+<img src="{{ url_for('static', filename='hkdancelogo.png') }}" class="centerHKDANCEImage" alt="香港舞蹈團" >
+
+<form id="form" action="/report/" method="POST">
+
+    <div class="row">
+
+        <div class="column">
+            <h2 style="text-align: left">節目</h2>
+            <div id="cbShow" class="checkboxtext"></div><br>
+        </div>
+        <div class="column">
+            <h2 style="text-align: left">首次觀賞</h2>
+            <div id="cbFirstTime" class="checkboxtext"></div><br>
+        </div>
+        <div class="column">
+            <h2 style="text-align: left">報告</h2>
+
+
+            <input  class="button" type="submit" value="&nbsp;製作報告&nbsp;"><br><br>
+
+
+
+            <a href="{{ url_for('static', filename='HKDANCE2023-全部.pptx') }}" download="HKDANCE2023-全部.pptx">               
+            <button class="button" type="button">&nbsp;下載圖表（全部）&nbsp;</button>
+            </a><br>
+            <a href="{{ url_for('static', filename='HKDANCE2023-首次觀賞.pptx') }}" download="HKDANCE2023-學生.pptx">
+            <button class="button" type="button">&nbsp;下載圖表（首次觀賞）&nbsp;</button>
+            </a><br>
+            <a href="{{ url_for('static', filename='HKDANCE2023-非首次觀賞.pptx') }}" download="HKDANCE2023-非學生.pptx">
+            <button class="button" type="button">&nbsp;下載圖表（非首次觀賞）&nbsp;</button>
+            </a>
+            <br><br>
+
+
+
+
+
+            <a href="{{ url_for('static', filename='HKDANCE2023-圖表數據.xlsx') }}" download="HKDANCE2023-圖表數據.xlsx">
+            <button  class="button" type="button">&nbsp;下載圖表數據&nbsp;</button>
+            </a>
+            <br><br>
+
+
+
+            <a href="{{ url_for('static', filename='HKDANCE2023-觀眾意見.docx') }}" download="HKDANCE2023-觀眾意見.docx">
+            <button  class="button" type="button">&nbsp;下載觀眾意見&nbsp;</button>
+            </a>
+
+            <br><br>
+            <p><small>現時數據<br>{{dataDateTime}}</small><p>
+            <input type="checkbox" id="cbRenewData" name="renewDataYN" value="Yes">
+            <label for="cbRenewData"><small>更新數據</small></label>
+            <br><br>
+            
+
+            <button class="button" name="logout" value="logout" type="submit">&nbsp;登出&nbsp;</button>
+        </div>
+
+    </div>
+
+
+
+
+
+</form>
+
+
+<center>
+
+</center>
+
+<center>
+
+<div id="reportPage" class="multiChartContainer">
+
+<div class="colChartContainer">
+<h2>{{ d100['showtime']['label'] }}</h2>
+<canvas id="chartshowtime" </canvas>
+<br><br>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ d100['age']['label'] }}</h2>
+<canvas id="chartage" </canvas>
+<br><br>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ d100['sex']['label'] }}</h2>
+<canvas id="chartsex" </canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ d100['language']['label'] }}</h2>
+<canvas id="chartlanguage" ></canvas>
+</div>
+
+<div class="colChartContainerTall">
+<h2>{{ d100['district']['label'] }}</h2>
+<canvas id="chartdistrict" ></canvas>
+</div>
+
+<div class="colChartContainerTall">
+<h2>{{ d100['industry']['label'] }}</h2>
+<canvas id="chartindustry" ></canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ d100['income']['label'] }}</h2>
+<canvas id="chartincome" ></canvas>
+</div>
+
+
+<div class="colChartContainer">
+<h2>{{ d100['firsttime']['label'] }}</h2>
+<canvas id="chartfirsttime" </canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ d100['numdance']['label'] }}</h2>
+<canvas id="chartnumdance" </canvas>
+</div>
+
+
+<div class="colChartContainer">
+<h2>{{ d100['buytixwhen']['label'] }}</h2>
+<canvas id="chartbuytixwhen" </canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ d100['buytixwhat']['label'] }}</h2>
+<canvas id="chartbuytixwhat" </canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ dNot100['seeshowwho']['itemLabel'] }}</h2>
+<canvas id="chartseeshowwho" ></canvas>
+</div>
+
+
+
+<div class="colChartContainerTall">
+<h2>{{ dNot100['knowshowhow']['itemLabel'] }}</h2>
+<canvas id="chartknowshowhow" </canvas>
+</div>
+
+<div class="colChartContainerTall">
+<h2>{{ dNot100['seeshowwhy']['itemLabel'] }}</h2>
+<canvas id="chartseeshowwhy" ></canvas>
+</div>
+
+
+
+<div class="colChartContainer">
+<h2>{{ dNot100['impact']['itemLabel'] }}</h2>
+<canvas id="chartimpact" ></canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ dNot100['impactTop1']['itemLabel'] }}</h2>
+<canvas id="chartimpactTop1" ></canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ dNot100['sat']['itemLabel'] }}</h2>
+<canvas id="chartsat" ></canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ dNot100['satTop1']['itemLabel'] }}</h2>
+<canvas id="chartsatTop1" ></canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ dNot100['fringe']['itemLabel'] }}</h2>
+<canvas id="chartfringe" ></canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ dNot100['fringeTop1']['itemLabel'] }}</h2>
+<canvas id="chartfringeTop1" ></canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ dNot100['otherart1']['itemLabel'] }}</h2>
+<canvas id="chartotherart1" ></canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ dNot100['otherart2']['itemLabel'] }}</h2>
+<canvas id="chartotherart2" </canvas>
+</div>
+
+
+<div class="colChartContainer">
+<h2>{{ d100['hkdancefriend']['label'] }}</h2>
+<canvas id="charthkdancefriend" </canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ d100['nps_0']['label'] }}</h2>
+<canvas id="chartnps_0" </canvas>
+</div>
+
+<div class="colChartContainer">
+<h2>{{ d100['nps_2']['label'] }}</h2>
+<canvas id="chartnps_2" ></canvas>
+</div>
+
+</center>
+
+<div class="comments">
+<h2>觀眾意見</h2>
+<left>
+<comments id="numberedListComments" ></comments>
+</left>
+</div>
+
+
+
+</body>
+</html>
+
+
+<script>
+
+    Chart.register(ChartDataLabels);
+
+
+
+    Chart.defaults.font.size = 12;
+
+
+    const chartTitle = {
+    {% for key, value in d100.items() %} "{{key}}":"{{value['label']}}", {% endfor %}
+    {% for key, value in dNot100.items() %} "{{key}}":"{{value['itemLabel']}}", {% endfor %}
+    };
+
+
+
+
+
+    const pieColor = ["LightSalmon", "Salmon", "DarkSalmon", "LightCoral", "IndianRed", "Crimson", "Red", "FireBrick", "DarkRed"];
+
+    const pieOption = {
+            responsive: true,
+            maintainAspectRatio: false,
+ 			borderWidth :2,
+ 			plugins: {
+                datalabels: {
+          			clamp : true,
+          			anchor : 'center',
+         			color:
+             			function(context) {
+                            var index = context.datasetIndex;
+                            var c = "rgba(217, 60, 145, 1)";
+                            if (index%3==0) {c = "rgba(0, 0, 0, 1)"};
+                            if (index%3==1) {c = "rgba(0, 0, 0, 1)"};
+                            if (index%3==2) {c = "rgba(0, 0, 0, 1)"};
+                            return c;},
+          			font: {size: 10},
+          			formatter: function(value, context) {
+                         return Math.round(value*100) + '%';
+                         }
+                    },
+     			legend: {display: true,
+                    labels: {
+                        generateLabels: function(chart) {
+                            // Get the default label list
+                            const original = Chart.overrides.pie.plugins.legend.labels.generateLabels;
+                            const labelsOriginal = original.call(this, chart);
+                            //console.log("labelsOriginal", labelsOriginal);
+
+                            // Build an array of colors used in the datasets of the chart
+                            let datasetColors = chart.data.datasets.map(function(e) {
+                                return e.backgroundColor;
+                                });
+                            datasetColors = datasetColors.flat();
+
+                            // Modify the color and hide state of each label
+                            let numLabelPerDataSet = 3;
+                            labelsOriginal.forEach(label => {
+                                // There are three times as many labels as there are datasets. This converts the label index into the corresponding dataset index
+                                //console.log("label=", label);
+                                //console.log("label.index=", label.index);
+                                label.datasetIndex = (label.index - label.index % numLabelPerDataSet) / numLabelPerDataSet;
+                                //console.log("label.datasetIndex", label.datasetIndex);
+
+                                // The hidden state must match the dataset's hidden state
+                                label.hidden = !chart.isDatasetVisible(label.datasetIndex);
+
+                                // Change the color to match the dataset
+                                label.fillStyle = datasetColors[label.index];
+                                });
+
+                            return labelsOriginal;
+                            }
+                        },
+                    onClick: function(mouseEvent, legendItem, legend) {
+                        // toggle the visibility of the dataset from what it currently is
+                        legend.chart.getDatasetMeta(
+                        legendItem.datasetIndex
+                        ).hidden = legend.chart.isDatasetVisible(legendItem.datasetIndex);
+                        legend.chart.update();
+                        }
+                    },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const labelIndex = (context.datasetIndex * 2) + context.dataIndex;
+                            let pct = context.formattedValue*100;
+                            return context.chart.data.labels[labelIndex] + ': ' + pct.toFixed(0) + "%";
+                            }
+                        }
+                    }
+                }
+            };
+
+
+    const vertBarOption = {
+            responsive: true,
+            maintainAspectRatio: false,
+ 			borderWidth :2,
+ 			plugins: {
+     			datalabels: {
+         			clamp : true,
+         			anchor : 'end',
+                    align : 'end',
+                    offset : 2,
+         			color:
+             			function(context) {
+                            var index = context.datasetIndex;
+                            var c = "rgba(217, 60, 145, 1)";
+                            if (index%3==0) {c = "rgba(217, 60, 145, 1)"};
+                            if (index%3==1) {c = "rgba(25, 190, 145, 1)"};
+                            if (index%3==2) {c = "rgba(255, 153, 51, 1)"};
+                            return c;},
+         			font: {size: 10},
+         			formatter: function(value, context) {
+                        return Math.round(value*100) + '%';
+                        }
+                    },
+     			legend: {display: true},
+                tooltip: {
+                   callbacks: {
+                        label: function(context) {
+                            var label = context.dataset.label || '';
+
+                            if (label) {
+                                label += ': ';
+
+                                if (context.parsed.y !== null) {
+                                    label += parseFloat(context.parsed.y*100).toFixed(0) + "%";
+                                    }
+                                return label;
+                                }
+                            },
+                        }
+                    }
+                },
+ 			scales: {
+ 				y: {
+ 					beginAtZero: true,
+ 					ticks: {
+ 						callback: function(value, index, ticks) {
+ 							return parseFloat(value*100).toFixed(0) + "%";
+ 							}
+ 						}
+ 					}
+                },
+          };
+
+    const horBarOption = {
+            responsive: true,
+            maintainAspectRatio: false,
+ 			borderWidth :2,
+            indexAxis: 'y',
+ 			plugins: {
+                datalabels: {
+          			clamp : true,
+          			anchor : 'end',
+          			align : 'end',
+          			offset : 2,
+         			color:
+             			function(context) {
+                            var index = context.datasetIndex;
+                            var c = "rgba(217, 60, 145, 1)";
+                            if (index%3==0) {c = "rgba(217, 60, 145, 1)"};
+                            if (index%3==1) {c = "rgba(25, 190, 145, 1)"};
+                            if (index%3==2) {c = "rgba(255, 153, 51, 1)"};
+                            return c;},
+          			font: {size: 10},
+          			formatter: function(value, context) {
+                         return Math.round(value*100) + '%';
+                         }
+                    },
+     			legend: {display: true},
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            var label = context.dataset.label || '';
+
+                            if (label) {
+                                label += ': ';
+
+                                if (context.parsed.x !== null) {
+                                    label += parseFloat(context.parsed.x*100).toFixed(0) + "%";
+                                    }
+                                return label;
+                                }
+                            },
+                        }
+                    }
+                },
+ 			scales: {
+ 				x: {
+ 					beginAtZero: true,
+ 					ticks: {
+ 						callback: function(value, index, ticks) {
+ 							return parseFloat(value*100).toFixed(0) + "%";
+ 							}
+ 						}
+ 					}
+                }
+            };
+
+function SortByValue(cData) {
+    var LLL=cData["labels"];
+    var VVV0=cData["datasets"][0]["data"];
+    var VVV1=cData["datasets"][1]["data"];
+    var VVV2=cData["datasets"][2]["data"];
+    var NNN0=[];
+    var NNN1=[];
+    var NNN2=[];
+
+    VVV0.forEach((v,i)=>NNN0.push(parseFloat(v)));
+    VVV1.forEach((v,i)=>NNN1.push(parseFloat(v)));
+    VVV2.forEach((v,i)=>NNN2.push(parseFloat(v)));
+
+    const zip = (a, b0, b1, b2) => a.map((k, i) => [k, b0[i], b1[i], b2[i]]);
+    LLLNNN012=zip(LLL, NNN0, NNN1, NNN2);
+    LLLNNN012.sort((a,b) => (b[1] - a[1]));
+
+    LLLNNN012.forEach((v,i)=> {LLL[i]=v[0];VVV0[i]=v[1];VVV1[i]=v[2];VVV2[i]=v[3]});
+}
+
+    const FullBack="rgba(217, 60, 145, 0.3)";
+    const FullBor="rgba(217, 60, 145, 1)";
+
+    const AAABack="rgba(25, 190, 145, 0.3)";
+    const AAABor="rgba(25, 190, 145, 1)";
+
+    //const BBBBack="rgba(88, 190, 221, 0.3)"
+    //const BBBBor="rgba(88, 190, 221, 1)";
+    
+    const BBBBack="rgba(255, 153, 51, 0.3)"
+    const BBBBor="rgba(255, 153, 51, 1)";
+
+    const FullPro="rgba(217, 60, 145, 0.8)"
+    const FullPas="rgba(217, 60, 145, 0.5)"
+    const FullDec="rgba(217, 60, 145, 0.2)"
+
+    const AAAPro="rgba(25, 190, 145, 0.8)"
+    const AAAPas="rgba(25, 190, 145, 0.5)"
+    const AAADec="rgba(25, 190, 145, 0.2)"
+
+    //const BBBPro="rgba(88, 190, 221, 0.8)"
+    //const BBBPas="rgba(88, 190, 221, 0.5)"
+    //const BBBDec="rgba(88, 190, 221, 0.2)"
+    
+    const BBBPro="rgba(255, 153, 51, 0.8)"
+    const BBBPas="rgba(255, 153, 51, 0.5)"
+    const BBBDec="rgba(255, 153, 51, 0.2)"
+
+    var barColorFull = {backgroundColor:FullBack, borderColor:FullBor, hoverBackgroundColor: FullBor};
+    var barColorAAA = {backgroundColor:AAABack, borderColor:AAABor, hoverBackgroundColor: AAABor};
+    var barColorBBB = {backgroundColor:BBBBack, borderColor:BBBBor, hoverBackgroundColor: BBBBor};
+
+    var pieColorFull = {backgroundColor:[FullPro, FullPas, FullDec]}
+    var pieColorAAA = {backgroundColor:[AAAPro, AAAPas, AAADec]}
+    var pieColorBBB = {backgroundColor:[BBBPro, BBBPas, BBBDec]}
+
+    var chartData={};
+
+    const titleFull="{{ titleFull }}";
+    const titleAAA="{{ titleAAA }}";
+    const titleBBB="{{ titleBBB }}";
+    
+    
+    const checkBoxChosen={};
+    checkBoxChosen['show']=new Set([{% for s in showChosen %} {{s}}, {% endfor %} ]);
+    // checkBoxChosen['firsttime']=new Set([ {% for o in firsttimeChosen %} {{o}}, {% endfor %} ]);
+    checkBoxChosen['firsttime']=new Set([ {% for o in firsttimeChosenDisplay %} {{o}}, {% endfor %} ]);
+
+
+    
+    displayOverall =  checkBoxChosen['firsttime'].has(0) && checkBoxChosen['firsttime'].has(1)
+    displayFirst = checkBoxChosen['firsttime'].has(0) && (!checkBoxChosen['firsttime'].has(1))
+    displaySecond = checkBoxChosen['firsttime'].has(1) && (!checkBoxChosen['firsttime'].has(0))
+
+
+	chartData['nps_0'] = {
+        labels : [
+            {% for key, value in d100['nps_0']['optList'].items() %} "{{ value['label'] }}", {% endfor %}
+            {% for key, value in d100['nps_0']['optList'].items() %} "{{ value['label'] }}", {% endfor %}
+            {% for key, value in d100['nps_0']['optList'].items() %} "{{ value['label'] }}", {% endfor %}
+            ],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...pieColorFull, data : [{% for key, value in d100['nps_0']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...pieColorAAA, data : [{% for key, value in d100AAA['nps_0']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...pieColorBBB, data : [{% for key, value in d100BBB['nps_0']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+    chartData['nps_0']['labels'][0]=titleFull+":"+chartData['nps_0']['labels'][0];
+    chartData['nps_0']['labels'][3]=titleAAA+":"+chartData['nps_0']['labels'][3];
+    chartData['nps_0']['labels'][6]=titleBBB+":"+chartData['nps_0']['labels'][6];
+
+	chartData['nps_2'] = {
+        labels : [{% for key, value in d100['nps_2']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['nps_2']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['nps_2']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['nps_2']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+
+	chartData['showtime'] = {
+        labels : [{% for key, value in d100['showtime']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['showtime']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['showtime']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['showtime']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+            
+	chartData['sex'] = {
+        labels : [{% for key, value in d100['sex']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['sex']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['sex']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['sex']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+            
+	chartData['age'] = {
+        labels : [{% for key, value in d100['age']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['age']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['age']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['age']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+
+	chartData['industry'] = {
+        labels : [{% for key, value in d100['industry']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['industry']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['industry']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['industry']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+	chartData['district'] = {
+        labels : [{% for key, value in d100['district']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['district']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['district']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['district']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+	chartData['language'] = {
+        labels : [{% for key, value in d100['language']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['language']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['language']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['language']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+	chartData['income'] = {
+        labels : [{% for key, value in d100['income']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['income']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['income']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['income']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+	chartData['numdance'] = {
+        labels : [{% for key, value in d100['numdance']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['numdance']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['numdance']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['numdance']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+            
+
+	chartData['firsttime'] = {
+        labels : [{% for key, value in d100['firsttime']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['firsttime']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['firsttime']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['firsttime']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+            
+	chartData['hkdancefriend'] = {
+        labels : [{% for key, value in d100['hkdancefriend']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['hkdancefriend']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['hkdancefriend']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['hkdancefriend']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+            
+ 	chartData['buytixwhen'] = {
+         labels : [{% for key, value in d100['buytixwhen']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
+         datasets : [
+             {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['buytixwhen']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+             {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['buytixwhen']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['buytixwhen']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+             ]};
+             
+ 	chartData['buytixwhat'] = {
+         labels : [{% for key, value in d100['buytixwhat']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
+         datasets : [
+             {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['buytixwhat']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+             {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['buytixwhat']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['buytixwhat']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+             ]};                     
+        
+            
+                        
+	chartData['knowshowhow'] = {
+        labels : [{% for key, value in dNot100['knowshowhow']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['knowshowhow']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['knowshowhow']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['knowshowhow']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+	chartData['seeshowwhy'] = {
+        labels : [{% for key, value in dNot100['seeshowwhy']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['seeshowwhy']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['seeshowwhy']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['seeshowwhy']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+
+	chartData['seeshowwho'] = {
+        labels : [{% for key, value in dNot100['seeshowwho']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['seeshowwho']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['seeshowwho']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['seeshowwho']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+	chartData['impact'] = {
+        labels : [{% for key, value in dNot100['impact']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['impact']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['impact']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['impact']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+            
+
+	chartData['impactTop1'] = {
+        labels : [{% for key, value in dNot100['impactTop1']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['impactTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['impactTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['impactTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+        
+	chartData['otherart1'] = {
+        labels : [{% for key, value in dNot100['otherart1']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['otherart1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['otherart1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['otherart1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+	chartData['otherart2'] = {
+        labels : [{% for key, value in dNot100['otherart2']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['otherart2']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['otherart2']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['otherart2']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+	chartData['sat'] = {
+        labels : [{% for key, value in dNot100['sat']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['sat']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['sat']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['sat']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+
+	chartData['satTop1'] = {
+        labels : [{% for key, value in dNot100['satTop1']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['satTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['satTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['satTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+	chartData['fringe'] = {
+        labels : [{% for key, value in dNot100['fringe']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['fringe']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['fringe']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['fringe']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+
+	chartData['fringeTop1'] = {
+        labels : [{% for key, value in dNot100['fringeTop1']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
+        datasets : [
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['fringeTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['fringeTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['fringeTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
+            ]};
+
+
+    SortByValue(chartData["seeshowwhy"]);
+    SortByValue(chartData["knowshowhow"]);
+    SortByValue(chartData["seeshowwho"]);
+    SortByValue(chartData["industry"]);
+
+    SortByValue(chartData["impact"]);
+    SortByValue(chartData["impactTop1"]);
+    SortByValue(chartData["sat"]);
+    SortByValue(chartData["satTop1"]);
+	SortByValue(chartData["fringe"]);
+    SortByValue(chartData["fringeTop1"]);
+   
+    SortByValue(chartData["otherart1"]);
+    SortByValue(chartData["otherart2"]);
+    // SortByValue(chartData["aes"]);
+    // SortByValue(chartData["aesdisagree"]);
+
+
+    const jsChart={};
+
+	var ctx = document.getElementById('chartshowtime');
+	jsChart['showtime'] = new Chart(ctx, {type: 'bar', data: chartData['showtime'], options: horBarOption});
+
+
+	var ctx = document.getElementById('chartage');
+	jsChart['age'] = new Chart(ctx, {type: 'bar', data: chartData['age'], options: horBarOption});
+
+	var ctx = document.getElementById('chartsex');
+	jsChart['sex']= new Chart(ctx, {type: 'bar', data: chartData['sex'], options: horBarOption});
+
+	var ctx = document.getElementById('chartindustry');
+	jsChart['industry'] = new Chart(ctx, {type: 'bar', data: chartData['industry'], options: horBarOption});
+
+	var ctx = document.getElementById('chartdistrict');
+	jsChart['district'] = new Chart(ctx, {type: 'bar', data: chartData['district'], options: horBarOption});
+
+	var ctx = document.getElementById('chartlanguage');
+	jsChart['language'] = new Chart(ctx, {type: 'bar', data: chartData['language'], options: horBarOption});
+
+	var ctx = document.getElementById('chartincome');
+	jsChart['income'] = new Chart(ctx, {type: 'bar', data: chartData['income'], options: horBarOption});
+
+	var ctx = document.getElementById('chartnumdance');
+	jsChart['numdance'] = new Chart(ctx, {type: 'bar', data: chartData['numdance'], options: horBarOption});
+
+	var ctx = document.getElementById('chartfirsttime');
+	jsChart['firsttime'] = new Chart(ctx, {type: 'bar', data: chartData['firsttime'], options: horBarOption});
+
+	var ctx = document.getElementById('charthkdancefriend');
+	jsChart['hkdancefriend'] = new Chart(ctx, {type: 'bar', data: chartData['hkdancefriend'], options: horBarOption});
+
+	var ctx = document.getElementById('chartbuytixwhen');
+	jsChart['buytixwhen'] = new Chart(ctx, {type: 'bar', data: chartData['buytixwhen'], options: horBarOption});
+
+	var ctx = document.getElementById('chartbuytixwhat');
+	jsChart['buytixwhat'] = new Chart(ctx, {type: 'bar', data: chartData['buytixwhat'], options: horBarOption});
+
+	var ctx = document.getElementById('chartknowshowhow');
+	jsChart['knowshowhow'] = new Chart(ctx, {type: 'bar', data: chartData['knowshowhow'], options: horBarOption});
+
+	var ctx = document.getElementById('chartseeshowwhy');
+	jsChart['seeshowwhy'] = new Chart(ctx, {type: 'bar', data: chartData['seeshowwhy'], options: horBarOption});
+
+	var ctx = document.getElementById('chartseeshowwho');
+	jsChart['seeshowwho'] = new Chart(ctx, {type: 'bar', data: chartData['seeshowwho'], options: horBarOption});
+
+	var ctx = document.getElementById('chartimpact');
+	jsChart['impact'] = new Chart(ctx, {type: 'bar', data: chartData['impact'], options: horBarOption});
+
+	var ctx = document.getElementById('chartimpactTop1');
+	jsChart['impactTop1'] = new Chart(ctx, {type: 'bar', data: chartData['impactTop1'], options: horBarOption});
+
+	var ctx = document.getElementById('chartotherart1');
+	jsChart['otherart1'] = new Chart(ctx, {type: 'bar', data: chartData['otherart1'], options: horBarOption});
+
+	var ctx = document.getElementById('chartotherart2');
+	jsChart['otherart2'] = new Chart(ctx, {type: 'bar', data: chartData['otherart2'], options: horBarOption});
+
+	var ctx = document.getElementById('chartsat');
+	jsChart['sat'] = new Chart(ctx, {type: 'bar', data: chartData['sat'], options: horBarOption});
+
+	var ctx = document.getElementById('chartsatTop1');
+	jsChart['satTop1'] = new Chart(ctx, {type: 'bar', data: chartData['satTop1'], options: horBarOption});
+
+	var ctx = document.getElementById('chartfringe');
+	jsChart['fringe'] = new Chart(ctx, {type: 'bar', data: chartData['fringe'], options: horBarOption});
+
+	var ctx = document.getElementById('chartfringeTop1');
+	jsChart['fringeTop1'] = new Chart(ctx, {type: 'bar', data: chartData['fringeTop1'], options: horBarOption});
+
+	var ctx = document.getElementById('chartnps_0');
+	jsChart['nps_0'] = new Chart(ctx, {type: 'pie', data: chartData['nps_0'], options: pieOption});
+
+	var ctx = document.getElementById('chartnps_2');
+	jsChart['nps_2'] = new Chart(ctx, {type: 'bar', data: chartData['nps_2'], options: horBarOption});
+
+
+    var numListCom = document.getElementById("numberedListComments");
+    var theList=[];
+    {% for c in selectedComments %}
+        theList.push("<li>" + "{{ c[1] }}"+ "</li><br>");
+    {% endfor %}
+    var tempList= "<ol>" + theList.join('')+ "</ol>";
+    tempList=tempList.replace(/__LINEBREAK__/g,'<br>');
+    numListCom.innerHTML = tempList;
+
+
+function fillCanvasBackgroundWithColor(canvas, color) {
+    // Get the 2D drawing context from the provided canvas.
+    const context = canvas.getContext('2d');
+
+    // We're going to modify the context state, so it's
+    // good practice to save the current state first.
+    context.save();
+
+    context.globalCompositeOperation = 'destination-over';
+
+    // Fill in the background. We do this by drawing a rectangle
+    // filling the entire canvas, using the provided color.
+    context.fillStyle = color;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Restore the original context state from `context.save()`
+    context.restore();
+}
+
+
+
+//add event listener to button
+//document.getElementById('downloadPDF').addEventListener("click", downloadPDF);
+
+
+
+
+//donwload pdf from original canvas
+function downloadPDF() {
+
+
+    var thisPDF = new jsPDF('landscape', 'mm', 'a4');
+    var pdfWidth = thisPDF.internal.pageSize.getWidth();
+    var pdfHeight = thisPDF.internal.pageSize.getHeight();
+
+
+//    thisPDF.addFileToVFS('ARIALUNI-normal.ttf', ARIALUNI_FontStr)
+//    thisPDF.addFont('ARIALUNI-normal.ttf', 'ARIALUNI', 'normal');
+//    thisPDF.setFont("ARIALUNI");
+
+    thisPDF.addFileToVFS('NotoSansCJKtc-Black-normal.ttf', NotoSansCJKtc_FontStr);
+    thisPDF.addFont('NotoSansCJKtc-Black-normal.ttf', 'NotoSansCJKtc-Black', 'normal');
+    thisPDF.setFont("NotoSansCJKtc-Black");
+
+    thisPDF.setFontType("normal");
+    thisPDF.setFontSize(10);
+
+    console.log(thisPDF.getFontList())
+
+
+
+
+	const xHeader = Math.floor(pdfWidth*0.8);
+	const yHeader = Math.floor(pdfHeight*0.1);
+	const xPageNumber = Math.floor(pdfWidth*0.9);
+	const yPageNumber = Math.floor(pdfHeight*0.1);
+	const xTitle = Math.floor(pdfWidth*0.1);
+	const yTitle = Math.floor(pdfHeight*0.15);
+	// const widthChart = Math.floor(pdfWidth*0.8);
+	// const heightChart = Math.floor(pdfHeight*0.6);
+	const widthChart_default = 175; 
+    	const heightChart_default = 125;
+    	const widthChart_tall = 140; 
+    	const heightChart_tall = 200;	
+    	var widthChart=widthChart_default;
+    	var heightChart=heightChart_default;
+	console.log(widthChart_default);
+	console.log(heightChart_default);
+	const xChart_default = Math.floor((pdfWidth-widthChart_default)/2);
+	const yChart_default = Math.floor(pdfHeight*0.2);
+	const xChart_tall = Math.floor((pdfHeight-widthChart_tall)/2);
+    	const yChart_tall = Math.floor(pdfWidth*0.2);
+	const xCoverPageTitle = Math.floor(pdfWidth*0.1);
+	const yCoverPageTitle = Math.floor(pdfHeight*0.3);
+
+	const xFooter = xTitle;
+	const yFooter = Math.floor(pdfHeight*0.9);
+
+	const fontSizeCoverPageTitle = 36;
+	const xStartCoverPageTitleLine = xCoverPageTitle;
+	const xEndCoverPageTitleLine = pdfWidth-xCoverPageTitle;
+	const yCoverPageTitleLine = yCoverPageTitle + fontSizeCoverPageTitle*0.2;
+	const fontSizeCoverPageShow = 12;
+
+
+	console.log(xTitle, xPageNumber, xHeader, xChart_default, widthChart_default);
+	console.log(yTitle, yPageNumber, yHeader, yChart_default, heightChart_default);
+
+
+
+	pageNumber=1;
+	thisPDF.setFontSize(fontSizeCoverPageTitle);
+    thisPDF.setTextColor(205, 92, 92);
+	thisPDF.text(xCoverPageTitle, yCoverPageTitle, "香港舞蹈團");
+
+
+    thisPDF.setLineWidth(0.5);
+    thisPDF.setDrawColor(205, 92, 92);
+    thisPDF.line(xStartCoverPageTitleLine, yCoverPageTitleLine, xEndCoverPageTitleLine, yCoverPageTitleLine);
+
+
+	var linedx=0;
+	thisPDF.setFontSize(fontSizeCoverPageShow);
+    thisPDF.setTextColor(40,40,40);
+	for ( const showInfo of Object.values(checkBoxInfo['show'])) {
+    	var sampSize = Number(showInfo[2]);
+    	console.log(showInfo[0], showInfo[1], showInfo[2]);
+    	console.log(checkBoxChosen['show'].has(showInfo[0]))
+    	if (sampSize>0 & checkBoxChosen['show'].has(showInfo[0])) {
+    	    linedx++;
+    	    thisPDF.text(xCoverPageTitle, yCoverPageTitleLine+linedx*fontSizeCoverPageShow*0.5, showInfo[1]);
+    	    thisPDF.text(xCoverPageTitle+60, yCoverPageTitleLine+linedx*fontSizeCoverPageShow*0.5, " (" + showInfo[2] + ")")
+    	    }
+	    }
+
+	thisPDF.setFontSize(8);
+    thisPDF.setTextColor(40, 40, 40);
+    thisPDF.text(xFooter, yFooter, "{{dataDateTime}}");
+
+	var pageNumber=0;
+	for (var k in jsChart) {
+        	console.log(k)
+        	if (k =="sat" | k == "xxx" | k == "yyy") {
+            	thisHeight = heightChart_tall
+            	thisWidth = widthChart_tall
+            	thisX = xChart_tall
+            	thisY = yChart_tall
+            	thisOrientation = "portrait"
+            	thisFooter = Math.floor(pdfWidth*0.9);
+            	} else {
+            	thisHeight = heightChart_default
+            	thisWidth = widthChart_default
+          	thisX = xChart_default
+           	thisY = yChart_default
+            	thisOrientation = "landscape"
+            	thisFooter = Math.floor(pdfHeight*0.9);
+            	};
+        thisPDF.addPage("a4", thisOrientation);
+        	pageNumber +=1;
+        	var thisCanvas=document.querySelector('#chart' + k);
+        	fillCanvasBackgroundWithColor(thisCanvas, 'white');
+        	var thisCanvasImage = thisCanvas.toDataURL("image/jpeg", 1.0);
+        	thisPDF.setFontSize(8);
+            thisPDF.setTextColor(40,40,40);
+    		thisPDF.text(xHeader, yHeader, "香港舞蹈團 "+pageNumber.toString());
+    		thisPDF.text(xFooter, thisFooter, "{{dataDateTime}}");
+            thisPDF.setFontSize(16);
+        	thisPDF.setTextColor(205, 92, 92);
+    		thisPDF.text(xTitle, yTitle, chartTitle[k]);
+    
+        	thisPDF.addImage(thisCanvasImage, 'JPEG', thisX, thisY, thisWidth, thisHeight);
+    	}
+
+
+
+    //for (datadx of ['aes', 'aesdisagree']) {
+    for (datadx of ['aes']) {
+        thisPDF.addPage("a4", 'portrait');
+    	pageNumber +=1;
+    	thisPDF.setFontSize(8);
+        thisPDF.setTextColor(40,40,40);
+        thisPDF.text(xHeader, yHeader, "香港舞蹈團 "+pageNumber.toString());
+        thisPDF.text(xFooter, Math.floor(pdfWidth*0.9), "{{dataDateTime}}");
+        thisPDF.setFontSize(16);
+    	thisPDF.setTextColor(205, 92, 92);
+    	thisPDF.text(xTitle, yTitle, chartTitle[datadx]);
+
+        thisPDF.setFontType("normal");
+        thisPDF.setFontSize(fontSizeCoverPageShow);
+        thisPDF.setTextColor(40,40,40);
+        for (let k in chartData[datadx]['labels']) {
+            thisPDF.text(xTitle+20, yTitle+20+10*k, chartData[datadx]['labels'][k] +
+                " (" + parseFloat(chartData[datadx]['datasets'][0]['data'][k]*100).toFixed(0) + "%)");
+            }
+        }
+
+	thisPDF.save('hkdanceChart.pdf');
+}
+
+
+
+    const checkBoxInfo={};
+
+    checkBoxInfo['show']=[];
+
+    {% for showdx in showAllowed %}
+        checkBoxInfo['show'].push([
+            {{showdx}},
+            "{{d100FullFull['show']['optList'][showdx]['label']}}",
+            "{{d100FullFull['show']['optList'][showdx]['yesCount']}}"
+            ]);
+    {% endfor %}
+
+
+//    {% for key, value in d100FullFull['show']['optList'].items() %}
+//        checkBoxInfo['show'].push([{{key}}, "{{value['label']}}", "{{value['yesCount']}}"]);
+//    {% endfor %}
+
+    checkBoxInfo['firsttime']=[];
+    {% for key, value in d100FullFull['firsttime']['optList'].items() %}
+        checkBoxInfo['firsttime'].push([{{key}}, "{{value['label']}}", "{{value['yesCount']}}"]);
+    {% endfor %}
+
+
+
+
+
+
+const MISSINGDATAVALUE=999;
+
+function createCheckBoxList(cbId, thisInfo, namePrefix, idPrefix) {
+
+    listInfo = checkBoxInfo[thisInfo]
+
+    for (idx=0; idx<listInfo.length; idx++) {
+
+        var idxStr=String(idx+1)
+
+        if (listInfo[idx][0]!=MISSINGDATAVALUE) {
+
+            var br = document.createElement('br');
+
+            var lab = document.createElement('label');
+            lab.htmlFor = idPrefix+idxStr;
+
+            var cb = document.createElement('input');
+            cb.type="checkbox";
+            cb.name=namePrefix+idxStr;
+            cb.value=listInfo[idx][0]
+            cb.id=idPrefix+idxStr;
+
+            lab.appendChild(cb);
+            lab.appendChild(document.createTextNode(listInfo[idx][1] + " ("+ listInfo[idx][2] + ")" ));
+            lab.appendChild(br);
+
+            document.getElementById(cbId).appendChild(lab);
+        }
+    }
+}
+
+
+function checkBoxToggle(cbId, thisInfo, idPrefix, truefalse) {
+
+    listInfo = checkBoxInfo[thisInfo]
+    //console.log(thisInfo, listInfo)
+
+    for (idx=0; idx < listInfo.length; idx++) {
+
+        if (listInfo[idx][0]!=MISSINGDATAVALUE) {
+        
+            //console.log(thisInfo, idx, listInfo[idx][0], listInfo[idx][1], idPrefix+String(idx+1))
+            //console.log(listInfo[idx][0],  checkBoxChosen[thisInfo]) ;
+     		//console.log(listInfo[idx][0] in checkBoxChosen[thisInfo]);
+
+            var x = document.getElementById(idPrefix+String(idx+1));
+            x.checked = checkBoxChosen[thisInfo].has(listInfo[idx][0]);
+
+
+
+            }
+        }
+}
+
+
+createCheckBoxList("cbShow", 'show', "cbShowName", "cbShowID");
+createCheckBoxList("cbFirstTime", 'firsttime', "cbFirstTimeName", "cbFirstTimeID");
+checkBoxToggle("cbShow", 'show', "cbShowID", true);
+checkBoxToggle("cbFirstTime", 'firsttime', "cbFirstTimeID", true);
+
+console.log(checkBoxChosen['firsttime'])
+</script>

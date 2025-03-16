@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+	box-sizing: border-box;
+	border : 10px;
+    border-radius: 25px;
+	
+	}
+body {
+	background-color: white;
+	}  
+
+h2 { 
+	color: IndianRed;
+	text-align: center;
+	}
+
+p {
+	font-family: verdana;
+	font-size: 12px;
+	}
+.centerHKREPImage {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top:50px;
+    width : 30%
+	}
+
+.loginContainer {
+    margin: auto;
+    margin-top:50px;
+	background-color: #f1f1f1;
+	width: 400px;
+    text-align: left;
+    padding:30px;
+	}
+
+
+.button {
+    background-color:#f5d6d6;
+    cursor: pointer;
+    width: 100%;
+    cursor: pointer;
+    padding: 12px 20px;
+    }
+.button:hover {
+    background-color:#ebadad;
+    }
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+</style>
+</head>
+
+<body>
+
+<form action="/login/"  method="POST">
+
+
+
+<div class="loginContainer">
+
+    <img src="{{ url_for('static', filename='hkdancelogo.png') }}" style="width:100%">
+    <label for="uname"><b>Username</b></label>
+    <br>
+    <input id="login" type="text" name="login" required>
+    <br><br>
+    
+    <label for="psw"><b>Password</b></label>
+    <br>
+    <input id="password" type="password" name="password" required>
+    <br><br><br>
+    
+    <button class="button" type="submit">Login</button>
+
+</div>
+
+
+
+</form>
+</body>
+</html>
+
+<script>
+    var tagLogin = document.getElementById("login");
+    var tagPassword = document.getElementById("password");
+    
+    if ("{{loginStatus}}" == "never") {
+        tagLogin.placeholder = "Enter login";
+        tagPassword.placeholder = "Enter password";
+        }
+    
+    if ("{{loginStatus}}" == "badlogin") {
+        tagLogin.placeholder = "Login does not exist";
+        tagPassword.placeholder = "Enter password";
+        }
+    
+    if ("{{loginStatus}}" == "badpassword") {
+        tagLogin.value = "{{lastLogin}}";
+        tagPassword.placeholder = "Password is incorrect";
+        }
+        
+</script>
+

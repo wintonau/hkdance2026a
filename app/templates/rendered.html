@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/hkdance_admin.css">
+
+</head>
+
+<body>
+
+<form enctype="multipart/form-data" id="admin_form" action="/admin/" method="POST">
+    
+
+<h2 style="text-align: left">登入</h2>
+<div id="rblogin"></div><br>
+<button class="button" type="submit" id="revlogin" name="action" value="revlogin">&nbsp;更新&nbsp;</button><br>
+<br>
+<label for="inputtedlogin">編號：</label>
+<input type="text" id="inputtedlogin" name="inputtedlogin">
+<label for="inputtedpassword">密碼：</label>
+<input type="text" id="inputtedpassword" name="inputtedpassword">
+
+
+<button class="button" type="submit" id="addlogin" name="action" value="addlogin">&nbsp;新增登入&nbsp;</button>
+<button class="button" type="submit" id="dellogin" name="action" value="dellogin">&nbsp;刪除登入&nbsp;</button>
+<button class="button" type="submit" id="changepassword" name="action" value="changepassword">&nbsp;更改密碼&nbsp;</button>
+<p id="message_login" style="color:red"></p><br>
+<br>
+
+
+<h2 style="text-align: left">節目</h2>
+<button  class="button" type="button" onclick="checkbox_toggle('show', 1)">&nbsp;全部&nbsp;</button>
+<button  class="button" type="button" onclick="checkbox_toggle('show', -1)">&nbsp;清空&nbsp;</button>
+<br>
+<div id="cbshow"></div><br>
+
+<p><small>現時數據 2025-02-17 08:58</small><p>
+<button class="button" type="submit" id="refreshdata" name="action" value="refreshdata">&nbsp;Refresh Data From Qualtrics&nbsp;</button>
+<button class="button" type="submit" id="downloaddata" name="action" value="downloaddata">&nbsp;下載數據&nbsp;</button>
+<button class="button" type="submit" id="uploadfile" name="action" value="uploadfile">&nbsp;上載檔案&nbsp;</button>
+<input type="file" name="file" /><p id="message_upload" style="color:blue"></p>
+
+<div class="row">
+<button class="button" name="logout" value="logout" type="submit">&nbsp;登出&nbsp;</button>
+</div>
+
+
+
+        
+       
+
+    
+    
+
+
+
+</form>
+
+
+
+
+
+
+<script>
+
+document.getElementById('message_login').innerHTML='';
+document.getElementById('message_upload').innerHTML='';
+
+
+const all_list_info={}; 
+                
+
+
+    all_list_info['show']=[];
+
+     
+        all_list_info['show'].push(['2403', '《風雲》沉浸式互動時光迴廊']);
+     
+        all_list_info['show'].push(['2203', '三國知多少(2023)']);
+     
+        all_list_info['show'].push(['2206', '世一衝衝衝']);
+     
+        all_list_info['show'].push(['2405', '以上兩個活動都有觀賞']);
+     
+        all_list_info['show'].push(['2201', '儷人行']);
+     
+        all_list_info['show'].push(['2302', '凝']);
+     
+        all_list_info['show'].push(['2303', '女書']);
+     
+        all_list_info['show'].push(['2205', '如影']);
+     
+        all_list_info['show'].push(['2202', '山水']);
+     
+        all_list_info['show'].push(['2301', '廿四節氣']);
+     
+        all_list_info['show'].push(['2204', '弦舞傾情']);
+     
+        all_list_info['show'].push(['2401', '心鼓行']);
+     
+        all_list_info['show'].push(['2402', '快雪時晴']);
+     
+        all_list_info['show'].push(['2207', '此刻碰面在尋找我回答如果只有一件小事要??']);
+     
+        all_list_info['show'].push(['999', '沒有資料']);
+     
+        all_list_info['show'].push(['2406', '港漫武俠舞劇《風雲》']);
+     
+        all_list_info['show'].push(['2404', '舞動《風雲》戶外3D光影舞蹈展演']);
+     
+        all_list_info['show'].push(['2304', '舞縈嶺南']);
+     
+        all_list_info['show'].push(['2305', '舞縈嶺南 演出暨演後藝人談']);
+     
+        all_list_info['show'].push(['2308', '舞解三國']);
+     
+        all_list_info['show'].push(['2307', '蘭陵·入陣']);
+     
+        all_list_info['show'].push(['2208', '迴光']);
+     
+        all_list_info['show'].push(['2306', '鬍鬚爺爺之詩遊記2.0']);
+    
+        
+
+
+    all_list_info['login']=[];
+
+     
+        all_list_info['login'].push(['hk1', 'hk1']);
+     
+        all_list_info['login'].push(['hkdance', 'hkdance']);
+     
+        all_list_info['login'].push(['hkdanceadmin', 'hkdanceadmin']);
+     
+        all_list_info['login'].push(['superadmin', 'superadmin']);
+    
+        
+
+
+   
+
+var current_user='hkdanceadmin';
+const current_user_allowed={};
+
+current_user_allowed['show']=new Set([  2304,  2305,  2306,  2307,  2308,  2201,  2202,  2203,  2204,  2205,  2206,  2207,  2208,  2401,  2402,  2403,  2404,  2405,  2406,  2301,  2302,  2303,  ]); 
+console.log(current_user_allowed['show']);
+
+
+
+const MISSINGDATAVALUE=999;
+
+
+function create_radiobutton_login_list() {
+
+
+    list_info = all_list_info["login"]
+    
+    for (idx=0; idx<list_info.length; idx++) {
+        var idxStr = String(idx+1)
+        
+        var lab = document.createElement('label');
+        lab.htmlFor = list_info[idx][0];
+        lab.setAttribute('class', 'rb_container');
+        
+        var rb = document.createElement('input');
+        rb.type = "radio";
+        rb.name = "rblogin";
+
+        rb.value = list_info[idx][0]
+        
+        if (rb.value==current_user) {
+            rb.checked=true};
+            
+        rb.id = list_info[idx][0]
+        
+        rb.setAttribute("onclick", "document.getElementById('admin_form').submit();");
+        
+
+        
+        var span = document.createElement('span');
+        span.setAttribute('class', 'checkmark');
+        
+        lab.appendChild(rb);
+        lab.appendChild(span);
+        
+        lab.appendChild(document.createTextNode(list_info[idx][1]));
+        
+        var br = document.createElement('br');
+//        lab.appendChild(br);
+
+        document.getElementById("rblogin").appendChild(lab);
+    }
+}
+
+function create_checkbox_userallowed_list(thisVar) {
+
+    cbId = 'cb'+thisVar;
+    namePrefix = 'cb' + thisVar + 'name';
+    idPrefix = 'cb'+thisVar+'id';
+    
+    list_info = all_list_info[thisVar]
+
+    for (idx=0; idx<list_info.length; idx++) {
+    
+        var idxStr=String(idx+1)
+    
+        if (list_info[idx][0]!=MISSINGDATAVALUE) {
+            
+            
+            var cb = document.createElement('input');
+            cb.type="checkbox";
+            cb.name=namePrefix+idxStr;
+            cb.value=list_info[idx][0];
+            cb.setAttribute('class', 'checkbox_box');
+            cb.id=idPrefix+idxStr;
+            
+            var lab = document.createElement('label');
+            lab.htmlFor = idPrefix+idxStr;
+            lab.setAttribute('class', 'checkbox_label');
+            lab.innerHTML=list_info[idx][1];
+            
+            var br = document.createElement('br');
+            
+            document.getElementById(cbId).appendChild(cb);
+            document.getElementById(cbId).appendChild(lab);
+            document.getElementById(cbId).appendChild(document.createTextNode('  '));
+            }
+        }
+    }
+    
+function checkbox_toggle(thisVar, checkboxState) {
+    var cbId = 'cb'+thisVar;
+    var idPrefix = 'cb'+thisVar+'id';
+    var list_info = all_list_info[thisVar];
+    //console.log(thisVar, list_info)
+
+    for (idx=0; idx < list_info.length; idx++) {
+    
+        if (list_info[idx][0]!=MISSINGDATAVALUE) {
+
+            var x = document.getElementById(idPrefix+String(idx+1));
+            if (checkboxState==0) {
+                x.checked = current_user_allowed[thisVar].has(Number(x.value))
+            } else {
+                x.checked = (checkboxState==1)
+            }
+            
+            }
+        }
+
+    }
+
+
+function uncheck_report_checkbox() {
+            //console.log(thisVar, idx, list_info[idx][0], list_info[idx][1], idPrefix+String(idx+1))
+            //console.log(list_info[idx][0],  checkBoxChosen[thisVar]) ;
+			//console.log(list_info[idx][0] in checkBoxChosen[thisVar]);
+            
+    document.getElementById("show").checked=false;
+    }
+    
+    
+
+create_checkbox_userallowed_list('show');
+create_radiobutton_login_list();
+
+checkbox_toggle('show', 0);
+
+</script>

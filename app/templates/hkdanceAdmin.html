@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='hkdance_admin.css') }}">
+
+</head>
+
+<body>
+
+<form enctype="multipart/form-data" id="admin_form" action="/admin/" method="POST">
+    
+
+<h2 style="text-align: left">登入</h2>
+<div id="rblogin"></div><br>
+<button class="button" type="submit" id="revlogin" name="action" value="revlogin">&nbsp;更新&nbsp;</button><br>
+<br>
+<label for="inputtedlogin">編號：</label>
+<input type="text" id="inputtedlogin" name="inputtedlogin">
+<label for="inputtedpassword">密碼：</label>
+<input type="text" id="inputtedpassword" name="inputtedpassword">
+
+
+<button class="button" type="submit" id="addlogin" name="action" value="addlogin">&nbsp;新增登入&nbsp;</button>
+<button class="button" type="submit" id="dellogin" name="action" value="dellogin">&nbsp;刪除登入&nbsp;</button>
+<button class="button" type="submit" id="changepassword" name="action" value="changepassword">&nbsp;更改密碼&nbsp;</button>
+<p id="message_login" style="color:red"></p><br>
+<br>
+
+
+<h2 style="text-align: left">節目</h2>
+<button  class="button" type="button" onclick="checkbox_toggle('show', 1)">&nbsp;全部&nbsp;</button>
+<button  class="button" type="button" onclick="checkbox_toggle('show', -1)">&nbsp;清空&nbsp;</button>
+<br>
+<div id="cbshow"></div><br>
+
+<p><small>現時數據 {{dataDateTime}}</small><p>
+<button class="button" type="submit" id="refreshdata" name="action" value="refreshdata">&nbsp;Refresh Data From Qualtrics&nbsp;</button>
+<button class="button" type="submit" id="downloaddata" name="action" value="downloaddata">&nbsp;下載數據&nbsp;</button>
+<button class="button" type="submit" id="uploadfile" name="action" value="uploadfile">&nbsp;上載檔案&nbsp;</button>
+<input type="file" name="file" /><p id="message_upload" style="color:blue"></p>
+
+<div class="row">
+<button class="button" name="logout" value="logout" type="submit">&nbsp;登出&nbsp;</button>
+</div>
+
+
+
+        
+       
+
+    
+    
+
+
+
+</form>
+
+
+
+
+
+
+<script>
+
+document.getElementById('message_login').innerHTML='{{message_login}}';
+document.getElementById('message_upload').innerHTML='{{message_upload}}';
+
+
+const all_list_info={}; 
+                
+{% for k1, v1 in all_list_info.items() %}
+
+    all_list_info['{{k1}}']=[];
+
+    {% for pair in v1 %} 
+        all_list_info['{{k1}}'].push(['{{pair[0]}}', '{{pair[1]}}']);
+    {% endfor %}
+        
+{% endfor %}
+
+   
+
+var current_user='{{user2check}}';
+const current_user_allowed={};
+
+current_user_allowed['show']=new Set([ {% for x in user_allowed %} {{x}}, {% endfor %} ]); 
+console.log(current_user_allowed['show']);
+
+
+
+const MISSINGDATAVALUE=999;
+
+
+function create_radiobutton_login_list() {
+
+
+    list_info = all_list_info["login"]
+    
+    for (idx=0; idx<list_info.length; idx++) {
+        var idxStr = String(idx+1)
+        
+        var lab = document.createElement('label');
+        lab.htmlFor = list_info[idx][0];
+        lab.setAttribute('class', 'rb_container');
+        
+        var rb = document.createElement('input');
+        rb.type = "radio";
+        rb.name = "rblogin";
+
+        rb.value = list_info[idx][0]
+        
+        if (rb.value==current_user) {
+            rb.checked=true};
+            
+        rb.id = list_info[idx][0]
+        
+        rb.setAttribute("onclick", "document.getElementById('admin_form').submit();");
+        
+
+        
+        var span = document.createElement('span');
+        span.setAttribute('class', 'checkmark');
+        
+        lab.appendChild(rb);
+        lab.appendChild(span);
+        
+        lab.appendChild(document.createTextNode(list_info[idx][1]));
+        
+        var br = document.createElement('br');
+//        lab.appendChild(br);
+
+        document.getElementById("rblogin").appendChild(lab);
+    }
+}
+
+function create_checkbox_userallowed_list(thisVar) {
+
+    cbId = 'cb'+thisVar;
+    namePrefix = 'cb' + thisVar + 'name';
+    idPrefix = 'cb'+thisVar+'id';
+    
+    list_info = all_list_info[thisVar]
+
+    for (idx=0; idx<list_info.length; idx++) {
+    
+        var idxStr=String(idx+1)
+    
+        if (list_info[idx][0]!=MISSINGDATAVALUE) {
+            
+            
+            var cb = document.createElement('input');
+            cb.type="checkbox";
+            cb.name=namePrefix+idxStr;
+            cb.value=list_info[idx][0];
+            cb.setAttribute('class', 'checkbox_box');
+            cb.id=idPrefix+idxStr;
+            
+            var lab = document.createElement('label');
+            lab.htmlFor = idPrefix+idxStr;
+            lab.setAttribute('class', 'checkbox_label');
+            lab.innerHTML=list_info[idx][1];
+            
+            var br = document.createElement('br');
+            
+            document.getElementById(cbId).appendChild(cb);
+            document.getElementById(cbId).appendChild(lab);
+            document.getElementById(cbId).appendChild(document.createTextNode('  '));
+            }
+        }
+    }
+    
+function checkbox_toggle(thisVar, checkboxState) {
+    var cbId = 'cb'+thisVar;
+    var idPrefix = 'cb'+thisVar+'id';
+    var list_info = all_list_info[thisVar];
+    //console.log(thisVar, list_info)
+
+    for (idx=0; idx < list_info.length; idx++) {
+    
+        if (list_info[idx][0]!=MISSINGDATAVALUE) {
+
+            var x = document.getElementById(idPrefix+String(idx+1));
+            if (checkboxState==0) {
+                x.checked = current_user_allowed[thisVar].has(Number(x.value))
+            } else {
+                x.checked = (checkboxState==1)
+            }
+            
+            }
+        }
+
+    }
+
+
+function uncheck_report_checkbox() {
+            //console.log(thisVar, idx, list_info[idx][0], list_info[idx][1], idPrefix+String(idx+1))
+            //console.log(list_info[idx][0],  checkBoxChosen[thisVar]) ;
+			//console.log(list_info[idx][0] in checkBoxChosen[thisVar]);
+            
+    document.getElementById("show").checked=false;
+    }
+    
+    
+
+create_checkbox_userallowed_list('show');
+create_radiobutton_login_list();
+
+checkbox_toggle('show', 0);
+
+</script>
