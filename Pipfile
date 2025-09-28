@@ -4,6 +4,25 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+gunicorn = "*"
+numpy = "*"
+openpyxl = "*"
+pandas = "*"
+pathlib2 = "*"
+psycopg2 = "*"
+python-docx = "*"
+python-pptx = "*"
+python-dotenv = "*"
+requests = "*"
+datetime = "*"
+flask = "*"
+flask-bcrypt = "*"
+flask-login = "*"
+qualtricsapi = "*"
+sqlalchemy = "*"
+werkzeug = "*"
+importlib-metadata = "*"
+pyreadstat = "*"
 
 [dev-packages]
 
