@@ -220,13 +220,13 @@ def GetDataFromQualServer():
         
         data['showtime']=data['onetime_showtime'].where(data['onetime_showtime'].notnull(),data['showtime']) 
         
-        data['showtime'] = data['showtime'].replace(250101, 240301)
-        data['showtime'] = data['showtime'].replace(250102, 240302)
-        data['showtime'] = data['showtime'].replace(250103, 240303)
-        data['showtime'] = data['showtime'].replace(250201, 240401)
-        data['showtime'] = data['showtime'].replace(250202, 240402)
-        data['showtime'] = data['showtime'].replace(250203, 240403)
-        data['showtime'] = data['showtime'].replace(250204, 240404)
+        # data['showtime'] = data['showtime'].replace(250101, 240301)
+        # data['showtime'] = data['showtime'].replace(250102, 240302)
+        # data['showtime'] = data['showtime'].replace(250103, 240303)
+        # data['showtime'] = data['showtime'].replace(250201, 240401)
+        # data['showtime'] = data['showtime'].replace(250202, 240402)
+        # data['showtime'] = data['showtime'].replace(250203, 240403)
+        # data['showtime'] = data['showtime'].replace(250204, 240404)
         
         data.loc[data['showtime'] == 240705, 'show'] = 2409
         data.loc[data['showtime'] == 240705, 'showtime'] = 240905
