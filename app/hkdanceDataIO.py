@@ -261,8 +261,11 @@ def GenerateGroupTitle(varName, valueList, d100Init):
 
 def GetDataCreationTime():
 
-    t = os.path.getmtime(glo.config['HKDANCEDATAPICKLE'])
-    t_timestamp = datetime.datetime.fromtimestamp(t)
+    try:
+        t = os.path.getmtime(glo.config['HKDANCEDATAPICKLE'])
+        t_timestamp = datetime.datetime.fromtimestamp(t)
+    except FileNotFoundError:
+        t_timestamp = datetime.datetime(2000, 1, 1)
     return t_timestamp.astimezone(ZoneInfo('Asia/Hong_Kong'))
      
 
