@@ -227,6 +227,15 @@ def GetDataFromQualServer():
         data['showtime'] = data['showtime'].replace(250202, 240402)
         data['showtime'] = data['showtime'].replace(250203, 240403)
         data['showtime'] = data['showtime'].replace(250204, 240404)
+        
+        data.loc[data['showtime'] == 240705, 'show'] = 2409
+        data.loc[data['showtime'] == 240705, 'showtime'] = 240905
+        
+        data.loc[data['showtime'] == 240706, 'show'] = 2409
+        data.loc[data['showtime'] == 240706, 'showtime'] = 240906
+
+
+        
         print("replace data")
         
         # data.to_excel(glo.config['HKDANCEDATAXLSX'], encoding='utf-16')

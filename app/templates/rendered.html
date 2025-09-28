@@ -168,13 +168,13 @@ p {
 
 
 
-            <a href="/HKDANCE2023-%E5%85%A8%E9%83%A8.pptx" download="HKDANCE2024-全部.pptx">               
+            <a href="/HKDANCE2025-%E5%85%A8%E9%83%A8.pptx" download="HKDANCE2025-全部.pptx">               
             <button class="button" type="button">&nbsp;下載圖表（全部）&nbsp;</button>
             </a><br>
-            <a href="/HKDANCE2023-%E9%A6%96%E6%AC%A1%E8%A7%80%E8%B3%9E.pptx" download="HKDANCE2024-學生.pptx">
+            <a href="/HKDANCE2025-%E9%A6%96%E6%AC%A1%E8%A7%80%E8%B3%9E.pptx" download="HKDANCE2025-學生.pptx">
             <button class="button" type="button">&nbsp;下載圖表（首次觀賞）&nbsp;</button>
             </a><br>
-            <a href="/HKDANCE2023-%E9%9D%9E%E9%A6%96%E6%AC%A1%E8%A7%80%E8%B3%9E.pptx" download="HKDANCE2024-非學生.pptx">
+            <a href="/HKDANCE2025-%E9%9D%9E%E9%A6%96%E6%AC%A1%E8%A7%80%E8%B3%9E.pptx" download="HKDANCE2025-非學生.pptx">
             <button class="button" type="button">&nbsp;下載圖表（非首次觀賞）&nbsp;</button>
             </a>
             <br><br>
@@ -183,19 +183,19 @@ p {
 
 
 
-            <a href="/HKDANCE2023-%E5%9C%96%E8%A1%A8%E6%95%B8%E6%93%9A.xlsx" download="HKDANCE2023-圖表數據.xlsx">
+            <a href="/HKDANCE2025-%E5%9C%96%E8%A1%A8%E6%95%B8%E6%93%9A.xlsx" download="HKDANCE2025-圖表數據.xlsx">
             <button  class="button" type="button">&nbsp;下載圖表數據&nbsp;</button>
             </a>
             <br><br>
 
 
 
-            <a href="/HKDANCE2023-%E8%A7%80%E7%9C%BE%E6%84%8F%E8%A6%8B.docx" download="HKDANCE2023-觀眾意見.docx">
+            <a href="/HKDANCE2025-%E8%A7%80%E7%9C%BE%E6%84%8F%E8%A6%8B.docx" download="HKDANCE2025-觀眾意見.docx">
             <button  class="button" type="button">&nbsp;下載觀眾意見&nbsp;</button>
             </a>
 
             <br><br>
-            <p><small>現時數據<br>2025-08-15　09:34</small><p>
+            <p><small>現時數據<br>2025-08-15　17:30</small><p>
             <input type="checkbox" id="cbRenewData" name="renewDataYN" value="Yes">
             <label for="cbRenewData"><small>更新數據</small></label>
             <br><br>
@@ -630,13 +630,13 @@ function SortByValue(cData) {
 
     var chartData={};
 
-    const titleFull="全部 (150)";
-    const titleAAA="非首次 (85)";
-    const titleBBB="首次 (65)";
+    const titleFull="全部 (21)";
+    const titleAAA="非首次 (13)";
+    const titleBBB="首次 (8)";
     
     
     const checkBoxChosen={};
-    checkBoxChosen['show']=new Set([ 2407,  ]);
+    checkBoxChosen['show']=new Set([ 2409,  ]);
     // checkBoxChosen['firsttime']=new Set([  0,  ]);
     checkBoxChosen['firsttime']=new Set([  0,  1,  ]);
 
@@ -654,9 +654,9 @@ function SortByValue(cData) {
              "推薦者",  "被動者",  "批評者", 
             ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...pieColorFull, data : [ "0.58",  "0.29333333333333333",  "0.12666666666666668",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...pieColorAAA, data : [ "0.5647058823529412",  "0.3058823529411765",  "0.12941176470588237",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...pieColorBBB, data : [ "0.6",  "0.27692307692307694",  "0.12307692307692308",  ]},
+            {hidden: !displayOverall, label : titleFull, ...pieColorFull, data : [ "0.6190476190476191",  "0.19047619047619047",  "0.19047619047619047",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...pieColorAAA, data : [ "0.6923076923076923",  "0.07692307692307693",  "0.23076923076923078",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...pieColorBBB, data : [ "0.5",  "0.375",  "0.125",  ]},
             ]};
 
     chartData['nps_0']['labels'][0]=titleFull+":"+chartData['nps_0']['labels'][0];
@@ -666,83 +666,83 @@ function SortByValue(cData) {
 	chartData['nps_2'] = {
         labels : [ "淨推薦值", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.45333333333333325",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.43529411764705883",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.4769230769230769",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.4285714285714286",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.4615384615384615",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.375",  ]},
             ]};
 
 
 	chartData['showtime'] = {
-        labels : [ "2025年5月16日(五)晚上",  "2025年5月17日(六)下午",  "2025年5月17日(六)晚上",  "2025年5月18日(日)下午",  "2025年7月26日(六)下午",  "2025年7月27日(日)下午",  "沒有資料", ],
+        labels : [ "2025年7月26日(六)下午",  "2025年7月27日(日)下午",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.2733333333333333",  "0.30666666666666664",  "0.22",  "0.06",  "0.08",  "0.06",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.2823529411764706",  "0.3411764705882353",  "0.18823529411764706",  "0.03529411764705882",  "0.09411764705882353",  "0.058823529411764705",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.26153846153846155",  "0.26153846153846155",  "0.26153846153846155",  "0.09230769230769231",  "0.06153846153846154",  "0.06153846153846154",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.5714285714285714",  "0.42857142857142855",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.6153846153846154",  "0.38461538461538464",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.5",  "0.5",  "0.0",  ]},
             ]};
 
             
 	chartData['sex'] = {
         labels : [ "男",  "女",  "非二元",  "不願透露",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.19333333333333333",  "0.7866666666666666",  "0.006666666666666667",  "0.013333333333333334",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.15294117647058825",  "0.8352941176470589",  "0.011764705882352941",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.24615384615384617",  "0.7230769230769231",  "0.0",  "0.03076923076923077",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.23809523809523808",  "0.7619047619047619",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.3076923076923077",  "0.6923076923076923",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.125",  "0.875",  "0.0",  "0.0",  "0.0",  ]},
             ]};
             
 	chartData['age'] = {
         labels : [ "21歲或以下",  "22-35歲",  "36-50歲",  "51-64歲",  "65歲或以上",  "不願透露",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.08",  "0.24",  "0.34",  "0.24",  "0.08666666666666667",  "0.013333333333333334",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.058823529411764705",  "0.2",  "0.2823529411764706",  "0.3176470588235294",  "0.12941176470588237",  "0.011764705882352941",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.1076923076923077",  "0.2923076923076923",  "0.4153846153846154",  "0.13846153846153847",  "0.03076923076923077",  "0.015384615384615385",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.09523809523809523",  "0.47619047619047616",  "0.14285714285714285",  "0.2857142857142857",  "0.0",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.07692307692307693",  "0.38461538461538464",  "0.07692307692307693",  "0.46153846153846156",  "0.0",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.125",  "0.625",  "0.25",  "0.0",  "0.0",  "0.0",  ]},
             ]};
 
 
 	chartData['industry'] = {
         labels : [ "藝術文化/創意產業",  "專業服務",  "廣告/市場推廣",  "餐旅業",  "零售批發",  "資訊科技",  "政府部門/公務人員",  "教育",  "公共服務業",  "退休",  "照顧家庭",  "學生",  "不願透露",  "其他",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.08",  "0.09333333333333334",  "0.02",  "0.006666666666666667",  "0.013333333333333334",  "0.04666666666666667",  "0.02",  "0.13333333333333333",  "0.08666666666666667",  "0.10666666666666667",  "0.07333333333333333",  "0.14",  "0.06666666666666667",  "0.11333333333333333",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.09411764705882353",  "0.10588235294117647",  "0.0",  "0.011764705882352941",  "0.011764705882352941",  "0.03529411764705882",  "0.011764705882352941",  "0.18823529411764706",  "0.08235294117647059",  "0.15294117647058825",  "0.07058823529411765",  "0.11764705882352941",  "0.047058823529411764",  "0.07058823529411765",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.06153846153846154",  "0.07692307692307693",  "0.046153846153846156",  "0.0",  "0.015384615384615385",  "0.06153846153846154",  "0.03076923076923077",  "0.06153846153846154",  "0.09230769230769231",  "0.046153846153846156",  "0.07692307692307693",  "0.16923076923076924",  "0.09230769230769231",  "0.16923076923076924",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.047619047619047616",  "0.0",  "0.0",  "0.0",  "0.09523809523809523",  "0.047619047619047616",  "0.0",  "0.047619047619047616",  "0.23809523809523808",  "0.14285714285714285",  "0.047619047619047616",  "0.23809523809523808",  "0.09523809523809523",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.07692307692307693",  "0.0",  "0.0",  "0.0",  "0.07692307692307693",  "0.0",  "0.0",  "0.07692307692307693",  "0.3076923076923077",  "0.0",  "0.07692307692307693",  "0.3076923076923077",  "0.07692307692307693",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.125",  "0.125",  "0.0",  "0.0",  "0.125",  "0.375",  "0.0",  "0.125",  "0.125",  "0.0",  ]},
             ]};
 
 	chartData['district'] = {
         labels : [ "中西區",  "東區",  "南區",  "灣仔區",  "九龍城區",  "觀塘區",  "深水埗區",  "黃大仙區",  "油尖旺區",  "離島區",  "葵青區",  "北區",  "西貢區",  "沙田區",  "大埔區",  "荃灣區",  "屯門區",  "元朗區",  "不願透露",  "其他",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.05333333333333334",  "0.02",  "0.02",  "0.04666666666666667",  "0.06666666666666667",  "0.04",  "0.05333333333333334",  "0.03333333333333333",  "0.06",  "0.013333333333333334",  "0.05333333333333334",  "0.02",  "0.02",  "0.13333333333333333",  "0.06",  "0.02666666666666667",  "0.08666666666666667",  "0.13333333333333333",  "0.04666666666666667",  "0.013333333333333334",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.07058823529411765",  "0.03529411764705882",  "0.03529411764705882",  "0.047058823529411764",  "0.047058823529411764",  "0.058823529411764705",  "0.03529411764705882",  "0.011764705882352941",  "0.07058823529411765",  "0.023529411764705882",  "0.047058823529411764",  "0.011764705882352941",  "0.0",  "0.16470588235294117",  "0.058823529411764705",  "0.03529411764705882",  "0.09411764705882353",  "0.11764705882352941",  "0.03529411764705882",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.03076923076923077",  "0.0",  "0.0",  "0.046153846153846156",  "0.09230769230769231",  "0.015384615384615385",  "0.07692307692307693",  "0.06153846153846154",  "0.046153846153846156",  "0.0",  "0.06153846153846154",  "0.03076923076923077",  "0.046153846153846156",  "0.09230769230769231",  "0.06153846153846154",  "0.015384615384615385",  "0.07692307692307693",  "0.15384615384615385",  "0.06153846153846154",  "0.03076923076923077",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.047619047619047616",  "0.047619047619047616",  "0.0",  "0.0",  "0.047619047619047616",  "0.0",  "0.0",  "0.047619047619047616",  "0.09523809523809523",  "0.0",  "0.14285714285714285",  "0.0",  "0.0",  "0.14285714285714285",  "0.0",  "0.0",  "0.047619047619047616",  "0.23809523809523808",  "0.14285714285714285",  "0.0",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.07692307692307693",  "0.07692307692307693",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.07692307692307693",  "0.0",  "0.07692307692307693",  "0.0",  "0.0",  "0.23076923076923078",  "0.0",  "0.0",  "0.07692307692307693",  "0.23076923076923078",  "0.15384615384615385",  "0.0",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "0.125",  "0.0",  "0.0",  "0.125",  "0.125",  "0.0",  "0.25",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.25",  "0.125",  "0.0",  "0.0",  ]},
             ]};
 
 	chartData['language'] = {
         labels : [ "廣東話",  "普通話",  "英文",  "其他",  "不願透露",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.8466666666666667",  "0.08",  "0.05333333333333334",  "0.013333333333333334",  "0.006666666666666667",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.8941176470588236",  "0.047058823529411764",  "0.03529411764705882",  "0.023529411764705882",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.7846153846153846",  "0.12307692307692308",  "0.07692307692307693",  "0.0",  "0.015384615384615385",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
             ]};
 
 	chartData['income'] = {
         labels : [ "＜$15,000",  "$15,001-$30,000",  "$30,001-$50,000",  "$50,001-$70,000",  "＞$70,001",  "不願透露",  "不適用",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.06666666666666667",  "0.19333333333333333",  "0.15333333333333332",  "0.04",  "0.07333333333333333",  "0.26666666666666666",  "0.20666666666666667",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.047058823529411764",  "0.15294117647058825",  "0.12941176470588237",  "0.047058823529411764",  "0.08235294117647059",  "0.2823529411764706",  "0.25882352941176473",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.09230769230769231",  "0.24615384615384617",  "0.18461538461538463",  "0.03076923076923077",  "0.06153846153846154",  "0.24615384615384617",  "0.13846153846153847",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "0.2857142857142857",  "0.0",  "0.14285714285714285",  "0.23809523809523808",  "0.3333333333333333",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "0.15384615384615385",  "0.0",  "0.15384615384615385",  "0.3076923076923077",  "0.38461538461538464",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.5",  "0.0",  "0.125",  "0.125",  "0.25",  "0.0",  ]},
             ]};
 
 	chartData['numdance'] = {
         labels : [ "1-2",  "3-4",  "5次或以上",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.6533333333333333",  "0.22",  "0.12666666666666668",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.5411764705882353",  "0.3411764705882353",  "0.11764705882352941",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.8",  "0.06153846153846154",  "0.13846153846153847",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.8571428571428571",  "0.047619047619047616",  "0.09523809523809523",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.7692307692307693",  "0.07692307692307693",  "0.15384615384615385",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "0.0",  "0.0",  "0.0",  ]},
             ]};
             
 
 	chartData['firsttime'] = {
         labels : [ "非首次",  "首次",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.5666666666666667",  "0.43333333333333335",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.6190476190476191",  "0.38095238095238093",  "0.0",  ]},
             {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "1.0",  "0.0",  "0.0",  ]},
             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "1.0",  "0.0",  ]},
             ]};
@@ -751,25 +751,25 @@ function SortByValue(cData) {
 	chartData['hkdancefriend'] = {
         labels : [ "已是會員",  "曾經是會員",  "非會員",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.13333333333333333",  "0.05333333333333334",  "0.8133333333333334",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.18823529411764706",  "0.08235294117647059",  "0.7294117647058823",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.06153846153846154",  "0.015384615384615385",  "0.9230769230769231",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.047619047619047616",  "0.9523809523809523",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.07692307692307693",  "0.9230769230769231",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "1.0",  "0.0",  ]},
             ]};
             
  	chartData['buytixwhen'] = {
          labels : [ "2023/24舞季訂票",  "演出前三個月",  "演出前五至十星期",  "演出前四星期",  "演出前兩至三星期",  "演出前一星期",  "演出當天",  "不適用",  "沒有資料", ],
          datasets : [
-             {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.06",  "0.14666666666666667",  "0.20666666666666667",  "0.20666666666666667",  "0.11333333333333333",  "0.06666666666666667",  "0.15333333333333332",  "0.0",  ]},
-             {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.08235294117647059",  "0.18823529411764706",  "0.2235294117647059",  "0.15294117647058825",  "0.11764705882352941",  "0.03529411764705882",  "0.15294117647058825",  "0.0",  ]},
-             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.03076923076923077",  "0.09230769230769231",  "0.18461538461538463",  "0.27692307692307694",  "0.1076923076923077",  "0.1076923076923077",  "0.15384615384615385",  "0.0",  ]},
+             {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.14285714285714285",  "0.2857142857142857",  "0.14285714285714285",  "0.14285714285714285",  "0.19047619047619047",  "0.047619047619047616",  "0.0",  "0.0",  ]},
+             {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.23076923076923078",  "0.23076923076923078",  "0.15384615384615385",  "0.07692307692307693",  "0.23076923076923078",  "0.07692307692307693",  "0.0",  "0.0",  ]},
+             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.375",  "0.125",  "0.25",  "0.125",  "0.0",  "0.0",  "0.0",  ]},
              ]};
              
  	chartData['buytixwhat'] = {
          labels : [ "正價門票",  "半價優惠門票(長者、學生等)",  "優惠門票",  "贈票",  "預訂(舞季及預售)",  "其他",  "沒有資料", ],
          datasets : [
-             {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.66",  "0.11333333333333333",  "0.06666666666666667",  "0.12",  "0.013333333333333334",  "0.02666666666666667",  "0.0",  ]},
-             {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.6823529411764706",  "0.1411764705882353",  "0.023529411764705882",  "0.10588235294117647",  "0.023529411764705882",  "0.023529411764705882",  "0.0",  ]},
-             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.6307692307692307",  "0.07692307692307693",  "0.12307692307692308",  "0.13846153846153847",  "0.0",  "0.03076923076923077",  "0.0",  ]},
+             {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.6190476190476191",  "0.23809523809523808",  "0.047619047619047616",  "0.047619047619047616",  "0.0",  "0.047619047619047616",  "0.0",  ]},
+             {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.5384615384615384",  "0.3076923076923077",  "0.07692307692307693",  "0.07692307692307693",  "0.0",  "0.0",  "0.0",  ]},
+             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.75",  "0.125",  "0.0",  "0.0",  "0.0",  "0.125",  "0.0",  ]},
              ]};                     
         
             
@@ -777,77 +777,77 @@ function SortByValue(cData) {
 	chartData['knowshowhow'] = {
         labels : [ "學校、機構推介",  "親友推介",  "網絡博客/",  "電子通訊",  "宣傳單張",  "香港舞蹈團網站",  "art-mate",  "網上平台的廣告",  "社交平台",  "其他藝團",  "港鐵車站告示板/海報廣告",  "巴士椅背廣告",  "文化中心節目展覽",  "演出當天",  "其他",  "西九文化區網頁/ 頻道WKCD website/ WKCD Channel", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.13333333333333333",  "0.24666666666666667",  "0.09333333333333334",  "0.12666666666666668",  "0.09333333333333334",  "0.22",  "0.08666666666666667",  "0.07333333333333333",  "0.14666666666666667",  "0.02",  "0.0",  "0.0",  "0.0",  "0.02",  "0.14",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.12941176470588237",  "0.18823529411764706",  "0.07058823529411765",  "0.16470588235294117",  "0.10588235294117647",  "0.3176470588235294",  "0.09411764705882353",  "0.09411764705882353",  "0.21176470588235294",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.10588235294117647",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.13846153846153847",  "0.3230769230769231",  "0.12307692307692308",  "0.07692307692307693",  "0.07692307692307693",  "0.09230769230769231",  "0.07692307692307693",  "0.046153846153846156",  "0.06153846153846154",  "0.046153846153846156",  "0.0",  "0.0",  "0.0",  "0.046153846153846156",  "0.18461538461538463",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.14285714285714285",  "0.14285714285714285",  "0.14285714285714285",  "0.047619047619047616",  "0.14285714285714285",  "0.3333333333333333",  "0.09523809523809523",  "0.14285714285714285",  "0.19047619047619047",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.047619047619047616",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.07692307692307693",  "0.15384615384615385",  "0.07692307692307693",  "0.0",  "0.15384615384615385",  "0.38461538461538464",  "0.07692307692307693",  "0.15384615384615385",  "0.3076923076923077",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.25",  "0.125",  "0.25",  "0.125",  "0.125",  "0.25",  "0.125",  "0.125",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.125",  "0.0",  ]},
             ]};
 
 	chartData['seeshowwhy'] = {
         labels : [ "香港舞蹈團",  "創作團隊",  "節目題材",  "宣傳推廣",  "愛好舞蹈",  "藝術形式",  "學校/機構/親友推介",  "傳媒報導",  "演出者親友",  "消磨時間",  "場地",  "其他", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.6133333333333333",  "0.14666666666666667",  "0.4266666666666667",  "0.19333333333333333",  "0.3933333333333333",  "0.25333333333333335",  "0.13333333333333333",  "0.04",  "0.06",  "0.06",  "0.06",  "0.06666666666666667",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.8",  "0.16470588235294117",  "0.4470588235294118",  "0.12941176470588237",  "0.4588235294117647",  "0.27058823529411763",  "0.08235294117647059",  "0.03529411764705882",  "0.058823529411764705",  "0.023529411764705882",  "0.07058823529411765",  "0.047058823529411764",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.36923076923076925",  "0.12307692307692308",  "0.4",  "0.27692307692307694",  "0.3076923076923077",  "0.23076923076923078",  "0.2",  "0.046153846153846156",  "0.06153846153846154",  "0.1076923076923077",  "0.046153846153846156",  "0.09230769230769231",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.6666666666666666",  "0.09523809523809523",  "0.47619047619047616",  "0.14285714285714285",  "0.3333333333333333",  "0.19047619047619047",  "0.09523809523809523",  "0.0",  "0.0",  "0.047619047619047616",  "0.047619047619047616",  "0.047619047619047616",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.6923076923076923",  "0.15384615384615385",  "0.5384615384615384",  "0.07692307692307693",  "0.38461538461538464",  "0.23076923076923078",  "0.07692307692307693",  "0.0",  "0.0",  "0.07692307692307693",  "0.07692307692307693",  "0.07692307692307693",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.625",  "0.0",  "0.375",  "0.25",  "0.25",  "0.125",  "0.125",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
             ]};
 
 
 	chartData['seeshowwho'] = {
         labels : [ "自己出席",  "伴侶",  "子女",  "朋友",  "其他家庭成員/親戚",  "其他", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.3333333333333333",  "0.17333333333333334",  "0.22",  "0.2866666666666667",  "0.16666666666666666",  "0.02",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.36470588235294116",  "0.2",  "0.18823529411764706",  "0.2235294117647059",  "0.16470588235294117",  "0.011764705882352941",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.2923076923076923",  "0.13846153846153847",  "0.26153846153846155",  "0.36923076923076925",  "0.16923076923076924",  "0.03076923076923077",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.38095238095238093",  "0.23809523809523808",  "0.2857142857142857",  "0.23809523809523808",  "0.14285714285714285",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.38461538461538464",  "0.38461538461538464",  "0.23076923076923078",  "0.15384615384615385",  "0.07692307692307693",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.375",  "0.0",  "0.375",  "0.375",  "0.25",  "0.0",  ]},
             ]};
 
 	chartData['impact'] = {
         labels : [ "演出加深了我對香港舞蹈團的了解",  "演出增添了我對舞劇、音樂會的興趣",  "我想觀賞更多香港舞蹈團的兒童舞劇",  "我想觀賞更多香港舞蹈團的舞蹈作品", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.9133333333333333",  "0.9",  "0",  "0.9533333333333334",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.9058823529411765",  "0.9058823529411765",  "0",  "0.9647058823529412",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.9230769230769231",  "0.8923076923076924",  "0",  "0.9384615384615385",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.9047619047619048",  "0.9047619047619048",  "0",  "0.9523809523809523",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.9230769230769231",  "0.8461538461538461",  "0",  "0.9230769230769231",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.875",  "1.0",  "0",  "1.0",  ]},
             ]};
             
 
 	chartData['impactTop1'] = {
         labels : [ "演出加深了我對香港舞蹈團的了解",  "演出增添了我對舞劇、音樂會的興趣",  "我想觀賞更多香港舞蹈團的兒童舞劇",  "我想觀賞更多香港舞蹈團的舞蹈作品", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.68",  "0.6866666666666666",  "0",  "0.8266666666666667",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.6705882352941176",  "0.7411764705882353",  "0",  "0.8470588235294118",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.6923076923076923",  "0.6153846153846154",  "0",  "0.8",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.7619047619047619",  "0.7142857142857143",  "0",  "0.8571428571428571",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.7692307692307693",  "0.7692307692307693",  "0",  "0.8461538461538461",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.75",  "0.625",  "0",  "0.875",  ]},
             ]};
 
         
 	chartData['otherart1'] = {
         labels : [ "舞蹈",  "戲劇",  "音樂",  "戲曲",  "跨媒介藝術", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.9866666666666667",  "0.98",  "0.98",  "0.78",  "0.9666666666666667",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "1.0",  "0.9882352941176471",  "0.9764705882352941",  "0.7647058823529411",  "0.9764705882352941",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.9692307692307692",  "0.9692307692307692",  "0.9846153846153847",  "0.8",  "0.9538461538461539",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "1.0",  "1.0",  "1.0",  "0.9523809523809523",  "1.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "1.0",  "1.0",  "1.0",  "0.9230769230769231",  "1.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "1.0",  "1.0",  "1.0",  "1.0",  ]},
             ]};
 
 	chartData['otherart2'] = {
         labels : [ "舞蹈",  "戲劇",  "音樂",  "戲曲",  "跨媒介藝術", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.9066666666666666",  "0.8466666666666667",  "0.82",  "0.54",  "0.76",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.8823529411764706",  "0.8",  "0.7764705882352941",  "0.5294117647058824",  "0.7294117647058823",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.9384615384615385",  "0.9076923076923077",  "0.8769230769230769",  "0.5538461538461539",  "0.8",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.9047619047619048",  "0.9523809523809523",  "0.9047619047619048",  "0.8571428571428571",  "0.8095238095238095",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.8461538461538461",  "0.9230769230769231",  "0.8461538461538461",  "0.7692307692307693",  "0.7692307692307693",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "1.0",  "1.0",  "1.0",  "0.875",  ]},
             ]};
 
 	chartData['sat'] = {
         labels : [ "導演/編舞",  "音樂",  "題材",  "舞蹈員",  "舞台美術",  "香氣",  "整體效果", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.96",  "0.9266666666666666",  "0.9733333333333334",  "0.98",  "0.9666666666666667",  "0",  "0.9666666666666667",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.9647058823529412",  "0.9411764705882353",  "0.9882352941176471",  "0.9882352941176471",  "0.9764705882352941",  "0",  "0.9764705882352941",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.9538461538461539",  "0.9076923076923077",  "0.9538461538461539",  "0.9692307692307692",  "0.9538461538461539",  "0",  "0.9538461538461539",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "1.0",  "0.9523809523809523",  "1.0",  "1.0",  "1.0",  "0",  "0.9523809523809523",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "1.0",  "0.9230769230769231",  "1.0",  "1.0",  "1.0",  "0",  "0.9230769230769231",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "1.0",  "1.0",  "1.0",  "1.0",  "0",  "1.0",  ]},
             ]};
 
 
 	chartData['satTop1'] = {
         labels : [ "導演/編舞",  "音樂",  "題材",  "舞蹈員",  "舞台美術",  "香氣",  "整體效果", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.6733333333333333",  "0.62",  "0.7466666666666667",  "0.76",  "0.7066666666666667",  "0",  "0.74",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.6470588235294118",  "0.6235294117647059",  "0.7176470588235294",  "0.7529411764705882",  "0.6705882352941176",  "0",  "0.7294117647058823",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.7076923076923077",  "0.6153846153846154",  "0.7846153846153846",  "0.7692307692307693",  "0.7538461538461538",  "0",  "0.7538461538461538",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.8095238095238095",  "0.7142857142857143",  "0.8571428571428571",  "0.8571428571428571",  "0.7619047619047619",  "0",  "0.8095238095238095",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.6923076923076923",  "0.6923076923076923",  "0.8461538461538461",  "0.7692307692307693",  "0.6153846153846154",  "0",  "0.6923076923076923",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "0.75",  "0.875",  "1.0",  "1.0",  "0",  "1.0",  ]},
             ]};
 
 	chartData['fringe'] = {
@@ -968,146 +968,6 @@ function SortByValue(cData) {
     var numListCom = document.getElementById("numberedListComments");
     var theList=[];
     
-        theList.push("<li>" + "i don&#39;t like the interactive elements nor the dialogue. i did not expect this to be a workshop-like. i found the dialogue quite kiddy; i prefer a pure dance performance like 廿四節仔. the acting ruins the show. i wish i knew it from the promotional message. it is indeed quite disappointing"+ "</li><br>");
-    
-        theList.push("<li>" + "/"+ "</li><br>");
-    
-        theList.push("<li>" + "非常欣賞和震撼的第一次看見原來香港舞蹈團咁好！表演認真舞蹈出色音樂和舞台嘅燈光都做得非常好。__LINEBREAK__可能在演繹木蘭出戰的時候有少少同敵軍對打的畫面會更好？__LINEBREAK__但是Anyway非常非常impressed"+ "</li><br>");
-    
-        theList.push("<li>" + "Very original"+ "</li><br>");
-    
-        theList.push("<li>" + "希望多啲表演帶給大家"+ "</li><br>");
-    
-        theList.push("<li>" + "有創意，有互動，有驚喜"+ "</li><br>");
-    
-        theList.push("<li>" + "good"+ "</li><br>");
-    
-        theList.push("<li>" + "非常喜歡以文化研究員來解說故事同穿插舞蹈。比舞解三國更引人入勝。"+ "</li><br>");
-    
-        theList.push("<li>" + "對舞蹈的了解和興趣增加了"+ "</li><br>");
-    
-        theList.push("<li>" + "十分喜歡！"+ "</li><br>");
-    
-        theList.push("<li>" + "very touching performance!!! Nice arrangement with coordination of lighting and aroma."+ "</li><br>");
-    
-        theList.push("<li>" + "觀看舞說木蘭，與話劇团合作是有新鮮感，舞者落台行走及觀眾分心，未能全心欣赏台上舞者表演。這如果話劇是可行，但跳舞就不太好，反之叫觀者上台學棒是好的。以上是我的意見。"+ "</li><br>");
-    
-        theList.push("<li>" + "I was looking forward to seeing Mulan wearing red and practicing her sword skills like the promotional materials. That segment was lacking. Everything else was incredible."+ "</li><br>");
-    
-        theList.push("<li>" + "好欣賞與觀眾互動環節，演出亦都非常dynamic, __LINEBREAK__水平也提升了不少👍🏻👍🏻👍🏻"+ "</li><br>");
-    
-        theList.push("<li>" + "將軍百戰死，壯士十年歸。歸來見天子，天子坐明堂。策勳十二轉，賞賜百千 &#34;彊&#34;。可汗問所欲，「木蘭不用尚書郎，願借明駝千里足，送兒還故鄉。」__LINEBREAK____LINEBREAK__印象中劇場用左 “强”，不是“彊”，是否有誤？"+ "</li><br>");
-    
-        theList.push("<li>" + "整體表現良好，可以見到各方面的設計用心，例如互動環節，leaflet 上的“令”，切合主題，且有新意。而且舞蹈和話劇的配合恰當，節奏緊湊，尤其喜歡行軍，或者木蘭思念家鄉的舞蹈。"+ "</li><br>");
-    
-        theList.push("<li>" + "加入話劇元素絕對適合3歲、及普羅大眾觀賞__LINEBREAK__期待欣賞更精彩的舞蹈編排"+ "</li><br>");
-    
-        theList.push("<li>" + "配合話劇團以及氣氛令人更印象深刻"+ "</li><br>");
-    
-        theList.push("<li>" + "編舞讓香味運用得自然，而話劇配合的效果不錯"+ "</li><br>");
-    
-        theList.push("<li>" + "Enjoy"+ "</li><br>");
-    
-        theList.push("<li>" + "超級喜歡是次製作，有互動，有善用台上台下空間，並且有驚喜的感官體驗(燈籠的香)，故事完整易明，舞蹈員舞技精堪，整體所有設計都配合好睇"+ "</li><br>");
-    
-        theList.push("<li>" + "continue to produce new and creative performance"+ "</li><br>");
-    
-        theList.push("<li>" + "Loved the creativity and artistry of the dancers and overall performance. Thank you"+ "</li><br>");
-    
-        theList.push("<li>" + "從中英劇團嘅合作，令到舞蹈表演有和觀眾互動的新意"+ "</li><br>");
-    
-        theList.push("<li>" + "It’s pleasant to explore Chinese culture through dance and music. Congratulations and please we look forward for more up coming performance from the Hong Kong Dance Company. thank you"+ "</li><br>");
-    
-        theList.push("<li>" + "這個關於戰爭主題、背景音樂可能對幼兒（4-5歲）會有少少不安"+ "</li><br>");
-    
-        theList.push("<li>" + "希望舉辦多一點中國舞的演出，勿太當代；最好有水袖的"+ "</li><br>");
-    
-        theList.push("<li>" + "努力💪🏻加水，期待下次再看您們演出💪🏻💪🏻"+ "</li><br>");
-    
-        theList.push("<li>" + "女子舞蹈優美。演繹練兵及戰爭的部分稍為不夠緊張緊湊。"+ "</li><br>");
-    
-        theList.push("<li>" + "the music for war section needs more percussion and drums to stand out the atmosphere. __LINEBREAK__disappointed on the war scenes __LINEBREAK____LINEBREAK__the drama is not too much. __LINEBREAK____LINEBREAK__excellent dancers__LINEBREAK____LINEBREAK__excellent posters and design __LINEBREAK____LINEBREAK__good try"+ "</li><br>");
-    
-        theList.push("<li>" + "下次如果再有這種花木蘭或者其他的表演，在打仗的時候可以加一些古箏或者是琵琶之銳的中國傳統樂器而不是西式樂器，而且下次記得找我來舞~我也是北京舞蹈學院的成員~六級"+ "</li><br>");
-    
-        theList.push("<li>" + "繼續加油"+ "</li><br>");
-    
-        theList.push("<li>" + "Really impressed with the female lead dancer. The dance of Mulan and her father was very touching. Also loved the one with female dancers weaving"+ "</li><br>");
-    
-        theList.push("<li>" + "多元素演出，非常精彩!"+ "</li><br>");
-    
-        theList.push("<li>" + "演出加入互動環節非常好"+ "</li><br>");
-    
-        theList.push("<li>" + "演木蘭父親的舞者裝扮可再成熟老氣些，不然和木蘭共舞時，感覺不像父女而像情侶。"+ "</li><br>");
-    
-        theList.push("<li>" + "舞蹈编排方面比以前「木蘭」舞劇節奏更緊湊，能一氣呵成把故事內容表現出來！"+ "</li><br>");
-    
-        theList.push("<li>" + "非常好"+ "</li><br>");
-    
-        theList.push("<li>" + "非常之好嘅舞劇，下次會再支持"+ "</li><br>");
-    
-        theList.push("<li>" + "欣賞話劇與舞蹈的結合，表現方式嶄新。"+ "</li><br>");
-    
-        theList.push("<li>" + "excellent to incorporate different elements __LINEBREAK__song dance poetry, martial arts __LINEBREAK__look forward to next performances"+ "</li><br>");
-    
-        theList.push("<li>" + "The calligraphy on the background was the only weakness.  Other than that, the whole production was excellent!"+ "</li><br>");
-    
-        theList.push("<li>" + "Excellent performance ! __LINEBREAK__Good crossover with drama for story telling. __LINEBREAK__"+ "</li><br>");
-    
-        theList.push("<li>" + "veey good! Love the production and become a fan of HKDC last 2 years! Keep it up!"+ "</li><br>");
-    
-        theList.push("<li>" + "舞蹈設計，燈光，服裝，音樂均非常精彩，當中尤以音樂最為打動我。是次結合畫劇及台下觀眾互動，能改變一下以往的表演形式，創新精神值得加許。__LINEBREAK____LINEBREAK__舞蹈編排能突出故事情節及主角心情，令觀眾投入其中。當中父女情及對戰爭的反思讓是次舞蹈表演更具意義。__LINEBREAK____LINEBREAK__精彩的演出。"+ "</li><br>");
-    
-        theList.push("<li>" + "好"+ "</li><br>");
-    
-        theList.push("<li>" + "Very good!"+ "</li><br>");
-    
-        theList.push("<li>" + "讚賞：1）與觀眾有互動。2）舞蹈加上歷史題材表演非常新穎。3）服裝恰到好處既平衡表演亦不會誇張。__LINEBREAK____LINEBREAK__可以進步的地方：1）音樂過於大聲，旋律重複不夠豐富，可以考慮加入更多中國樂器元素以配合中國歷史題材。3）舞台效果可以加以利用背景屏幕投影和變化，令到表演題材更加貼體和豐富，增加觀眾代入感"+ "</li><br>");
-    
-        theList.push("<li>" + "很精彩的表演，燈光、音響、香氣配合得很好"+ "</li><br>");
-    
-        theList.push("<li>" + "香氣稍稍過強，有時會分散了注意力。"+ "</li><br>");
-    
-        theList.push("<li>" + "Good interaction with audience."+ "</li><br>");
-    
-        theList.push("<li>" + "很有新鮮感，加深小孩對劇目認識。祈望再有舞蹈X話劇的另類新表演觀看"+ "</li><br>");
-    
-        theList.push("<li>" + "是次表演妙用舞台和觀眾席兩邊空間，令觀眾整體參與投入度更高。__LINEBREAK__擔當花木蘭女舞者，動作優美、姿態展現流暢熟練，值得一讚。"+ "</li><br>");
-    
-        theList.push("<li>" + "欣賞舞蹈团向前走一步，特意安排&amp;lt;自在剧埸&amp;gt;回应特殊群体需要，让此群体享有同等接觸舞蹈剧埸机会，安心欣赏艺术，难能可贵。期待明年另一自在剧场安排。"+ "</li><br>");
-    
-        theList.push("<li>" + "看完后认为主题是由木兰从军引发对“珍惜陪伴家人”的思考，主题创意性很强，因此整体感情偏向于突出木兰作为女子代父从军，思乡，思亲的柔情，很大程度上弱化了女扮男装从军十二年的勇敢、坚毅、顽强等品质。所以在情节分布，音乐配合和舞蹈动作上大幅度侧重于表现女儿柔情，而不是坚强的特质。个人认为即使创新但这种坚毅品质作为木兰故事及木兰辞的重要部分被严重弱化。优点：整体舞台灯光效果很好。"+ "</li><br>");
-    
-        theList.push("<li>" + "上一条忘了写：整体管理略差，中间多次小孩高声叫嚷无staff阻止，非常影响观看体验"+ "</li><br>");
-    
-        theList.push("<li>" + "舞蹈結合話劇的形式非常好，因為有時只是看舞蹈會有些沈悶。"+ "</li><br>");
-    
-        theList.push("<li>" + "我有意见__LINEBREAK____LINEBREAK__这个广东话我不想听，我希望你们用普通话说可以吗？"+ "</li><br>");
-    
-        theList.push("<li>" + "Mulan was so beautiful and also the light was amazing"+ "</li><br>");
-    
-        theList.push("<li>" + "疫情前觀看的花木蘭，和這次的花木蘭都是穿梭時空，返回戰場上；但兩次以不同手法展現給觀眾，也加上更多與觀眾互動形式， 10分精彩，除了加深大家對歷史認識，也加上反戰元素，很有教育意義，小朋友和大人也看得開心和投入。__LINEBREAK____LINEBREAK__上次對織女們演繹織布那場舞很深刻，今次也喜歡這場舞，和平後那場挑燈歌舞，也很感人，還利用兩邊閣樓，分別有兩位舞者挑燈演出🤗__LINEBREAK____LINEBREAK__謝謝香港舞蹈各人精心設計👍👍👍"+ "</li><br>");
-    
-        theList.push("<li>" + "可向院校推廣或包場"+ "</li><br>");
-    
-        theList.push("<li>" + "期望表演時間可以是2小時"+ "</li><br>");
-    
-        theList.push("<li>" + "整體非常好。互動環節希望可以挑選更多中學生或成年人參與活動。這次活動上台活動大多都是幾歲小朋友，小朋友未能明白木蘭辭的意思。中學生會在書本學習木蘭辭，或者對考試有用。"+ "</li><br>");
-    
-        theList.push("<li>" + "結合了舞蹈和話劇__LINEBREAK__是很好的嘗試，兩位演員的演出也很理想__LINEBREAK__希望日後會有類似的演出。"+ "</li><br>");
-    
-        theList.push("<li>" + "非常喜歡用文化研究員來引入解說故事與舞蹈。比舞解三國更引人入勝。棒～"+ "</li><br>");
-    
-        theList.push("<li>" + "Very 👍 good"+ "</li><br>");
-    
-        theList.push("<li>" + "It’s really good, the music is real good, perfectly captured the atmosphere of Mulan."+ "</li><br>");
-    
-        theList.push("<li>" + "Good"+ "</li><br>");
-    
-        theList.push("<li>" + "舞説木蘭如果加入中式樂器例如古箏，琵琶就更傳神了。__LINEBREAK____LINEBREAK__加油！"+ "</li><br>");
-    
-        theList.push("<li>" + "1.  劇名改得非常好__LINEBREAK____LINEBREAK__2.  如果，以柔和的織女們編織舞蹈塲面為首幕。繼而逐漸發展至激昂澎湃劇情場面，會讓觀眾看得較舒服。__LINEBREAK____LINEBREAK__3.  全劇似乎側重舞蹈。祇畧畧帶過下列項4之扣人心弦之劇情。令熟悉花木蘭的觀眾覺得，到喉唔到肺，唔夠喉！而不熟悉的觀眾又未能看得明整個劇情。實熟可惜！__LINEBREAK____LINEBREAK__4.  我深信香港話劇團絶對有能力將下列扣人心弦的劇情深刻地以舞蹈形式演譯：__LINEBREAK____LINEBREAK__      a. 花木蘭英姿颯颯地洞悉敵方軍情，與長官商討對策，勇猛殺敵塲面__LINEBREAK____LINEBREAK__      b.  殿前自揭身細，皇上驚喜赦罪獎賞，拒升官，還鄉奉養父母天年__LINEBREAK____LINEBREAK__      c.  還鄉恢復女兒身，家人同袍（特別是長官）驚喜埸面__LINEBREAK____LINEBREAK__      d.  我覺得，花木蘭之婚姻以 open ending 處理不太適合。可以跟據最早原著為結局。 __LINEBREAK____LINEBREAK__加油 !__LINEBREAK__"+ "</li><br>");
-    
         theList.push("<li>" + "好適合小朋友觀看__LINEBREAK__新式嘅安排非常好"+ "</li><br>");
     
         theList.push("<li>" + "希望喺元朗劇院舉行多幾場__LINEBREAK__非常好睇，多謝"+ "</li><br>");
@@ -1123,132 +983,6 @@ function SortByValue(cData) {
         theList.push("<li>" + "飾演「木蘭」的舞蹈員，舞蹈與演出十分精彩和優美。特別喜歡以舞蹈展現織布的段落，那種輕柔有序，唯美旋轉，令人讚嘆！每一個部份都很好！__LINEBREAK____LINEBREAK__邀請現場觀眾參與演出部份，亦十分有趣！__LINEBREAK____LINEBREAK__個人覺得可能今次演出的對象是大人與小朋友，所以戰爭的部份，未夠「氣勢磅礡」震撼人心的力量，舞蹈員有點不足，音樂亦未夠，場地有點狹小。__LINEBREAK____LINEBREAK__整體而言，各人也做得很好！__LINEBREAK__希望將來有更多人認識這個劇目，展現中華文化。__LINEBREAK__"+ "</li><br>");
     
         theList.push("<li>" + "沒有"+ "</li><br>");
-    
-        theList.push("<li>" + "the drama and interactive elements ruined the show"+ "</li><br>");
-    
-        theList.push("<li>" + "Nice"+ "</li><br>");
-    
-        theList.push("<li>" + "會，感覺舞動人心"+ "</li><br>");
-    
-        theList.push("<li>" + "非常好睇專業值得咁遠嚟睇"+ "</li><br>");
-    
-        theList.push("<li>" + "I like this show"+ "</li><br>");
-    
-        theList.push("<li>" + "Originality and creativity"+ "</li><br>");
-    
-        theList.push("<li>" + "會"+ "</li><br>");
-    
-        theList.push("<li>" + "會"+ "</li><br>");
-    
-        theList.push("<li>" + "非常好看。小故事更令人理解舞蹈。"+ "</li><br>");
-    
-        theList.push("<li>" + "會"+ "</li><br>");
-    
-        theList.push("<li>" + "Yes"+ "</li><br>");
-    
-        theList.push("<li>" + "不是不會，但不會積極。"+ "</li><br>");
-    
-        theList.push("<li>" + "Enjoyable , entertaining"+ "</li><br>");
-    
-        theList.push("<li>" + "好看"+ "</li><br>");
-    
-        theList.push("<li>" + "It was entertaining and beautiful to watch"+ "</li><br>");
-    
-        theList.push("<li>" + "Very good perfirmance"+ "</li><br>");
-    
-        theList.push("<li>" + "题材吸收，演出專業"+ "</li><br>");
-    
-        theList.push("<li>" + "香味配合好impressive"+ "</li><br>");
-    
-        theList.push("<li>" + "新穎形式展現"+ "</li><br>");
-    
-        theList.push("<li>" + "創新"+ "</li><br>");
-    
-        theList.push("<li>" + "精彩"+ "</li><br>");
-    
-        theList.push("<li>" + "易明好看"+ "</li><br>");
-    
-        theList.push("<li>" + "a good local production"+ "</li><br>");
-    
-        theList.push("<li>" + "絕對支持創作，"+ "</li><br>");
-    
-        theList.push("<li>" + "Excellent performance and good interaction with the audience"+ "</li><br>");
-    
-        theList.push("<li>" + "The high quality performance composed has a deep connection to understand of Chinese and Hong Kong culture."+ "</li><br>");
-    
-        theList.push("<li>" + "題材新穎，話劇及舞蹈的組合有新鮮感"+ "</li><br>");
-    
-        theList.push("<li>" + "值得看"+ "</li><br>");
-    
-        theList.push("<li>" + "支持本地創作，欣賞藝術，增加生活姿采。"+ "</li><br>");
-    
-        theList.push("<li>" + "good dancers"+ "</li><br>");
-    
-        theList.push("<li>" + "會，想多些人能認識或睇到或欣賞舞蹈"+ "</li><br>");
-    
-        theList.push("<li>" + "會，「因為有難同當，有福同享。」"+ "</li><br>");
-    
-        theList.push("<li>" + "藝術元素豐富，有舞蹈，有音樂有話劇"+ "</li><br>");
-    
-        theList.push("<li>" + "Very good performance with super good price"+ "</li><br>");
-    
-        theList.push("<li>" + "多元化演出，整體表現出色!"+ "</li><br>");
-    
-        theList.push("<li>" + "老少咸宜且題材有教育性。"+ "</li><br>");
-    
-        theList.push("<li>" + "物超所值！"+ "</li><br>");
-    
-        theList.push("<li>" + "會，好好睇"+ "</li><br>");
-    
-        theList.push("<li>" + "因為好值得推薦"+ "</li><br>");
-    
-        theList.push("<li>" + "because it&#39;s beautifully choreographed __LINEBREAK__music score was excellent __LINEBREAK__dance was artistic __LINEBREAK__interactive and family friendly"+ "</li><br>");
-    
-        theList.push("<li>" + "Very enjoyable performance."+ "</li><br>");
-    
-        theList.push("<li>" + "Wonderful Hong Kong Production"+ "</li><br>");
-    
-        theList.push("<li>" + "專業"+ "</li><br>");
-    
-        theList.push("<li>" + "好睇和創意"+ "</li><br>");
-    
-        theList.push("<li>" + "Because I think this performance is amazing!"+ "</li><br>");
-    
-        theList.push("<li>" + "用現代舞表演形式帶出歷史題材，不會沉悶又有新鮮感，小朋友一方面可以欣賞藝術亦都能夠認識木蘭辭"+ "</li><br>");
-    
-        theList.push("<li>" + "很精彩的演出"+ "</li><br>");
-    
-        theList.push("<li>" + "舞蹈很好看"+ "</li><br>");
-    
-        theList.push("<li>" + "會推薦，整體表演形式流暢、有趣及有驚喜。"+ "</li><br>");
-    
-        theList.push("<li>" + "Yes. It&#39;s interesting."+ "</li><br>");
-    
-        theList.push("<li>" + "希望更多小朋友可藉著看舞蹈x話劇了解多些歴史"+ "</li><br>");
-    
-        theList.push("<li>" + "适合家长与儿童一起共赏，更自在的环境，被接纳的氛围"+ "</li><br>");
-    
-        theList.push("<li>" + "认为演出主题不太符合“木兰”特质"+ "</li><br>");
-    
-        theList.push("<li>" + "观影体验也不好"+ "</li><br>");
-    
-        theList.push("<li>" + "演出十分精采，舞蹈和話劇的表演者俱佳。"+ "</li><br>");
-    
-        theList.push("<li>" + "我的朋友还没看到舞说木兰电影真人版"+ "</li><br>");
-    
-        theList.push("<li>" + "演出精彩，有教育意義，最好是一家大細觀看，而且價錢合理"+ "</li><br>");
-    
-        theList.push("<li>" + "能夠再次接觸到木蘭辭。記憶猶新"+ "</li><br>");
-    
-        theList.push("<li>" + "追星"+ "</li><br>");
-    
-        theList.push("<li>" + "演出水準高"+ "</li><br>");
-    
-        theList.push("<li>" + "Always excellent show"+ "</li><br>");
-    
-        theList.push("<li>" + "Interesting __LINEBREAK__"+ "</li><br>");
-    
-        theList.push("<li>" + "的確覺得：__LINEBREAK____LINEBREAK__1.  舞蹈很好看__LINEBREAK__2.  故事有教育意義__LINEBREAK____LINEBREAK__"+ "</li><br>");
     
         theList.push("<li>" + "好"+ "</li><br>");
     
@@ -1380,7 +1114,7 @@ function downloadPDF() {
 
 	thisPDF.setFontSize(8);
     thisPDF.setTextColor(40, 40, 40);
-    thisPDF.text(xFooter, yFooter, "2025-08-15　09:34");
+    thisPDF.text(xFooter, yFooter, "2025-08-15　17:30");
 
 	var pageNumber=0;
 	for (var k in jsChart) {
@@ -1408,7 +1142,7 @@ function downloadPDF() {
         	thisPDF.setFontSize(8);
             thisPDF.setTextColor(40,40,40);
     		thisPDF.text(xHeader, yHeader, "香港舞蹈團 "+pageNumber.toString());
-    		thisPDF.text(xFooter, thisFooter, "2025-08-15　09:34");
+    		thisPDF.text(xFooter, thisFooter, "2025-08-15　17:30");
             thisPDF.setFontSize(16);
         	thisPDF.setTextColor(205, 92, 92);
     		thisPDF.text(xTitle, yTitle, chartTitle[k]);
@@ -1425,7 +1159,7 @@ function downloadPDF() {
     	thisPDF.setFontSize(8);
         thisPDF.setTextColor(40,40,40);
         thisPDF.text(xHeader, yHeader, "香港舞蹈團 "+pageNumber.toString());
-        thisPDF.text(xFooter, Math.floor(pdfWidth*0.9), "2025-08-15　09:34");
+        thisPDF.text(xFooter, Math.floor(pdfWidth*0.9), "2025-08-15　17:30");
         thisPDF.setFontSize(16);
     	thisPDF.setTextColor(205, 92, 92);
     	thisPDF.text(xTitle, yTitle, chartTitle[datadx]);
@@ -1583,14 +1317,20 @@ function downloadPDF() {
     
         checkBoxInfo['show'].push([
             2407,
-            "2024/25 舞說木蘭",
-            "150"
+            "2024/25 舞說木蘭(非元朗)",
+            "129"
             ]);
     
         checkBoxInfo['show'].push([
             2408,
             "2024/25 世一衝衝衝2.0",
             "205"
+            ]);
+    
+        checkBoxInfo['show'].push([
+            2409,
+            "2024/25 舞說木蘭(元朗)",
+            "21"
             ]);
     
 
@@ -1640,9 +1380,11 @@ function downloadPDF() {
 //    
 //        checkBoxInfo['show'].push([2406, "2024/25 港漫武俠舞劇《風雲》", "193"]);
 //    
-//        checkBoxInfo['show'].push([2407, "2024/25 舞說木蘭", "150"]);
+//        checkBoxInfo['show'].push([2407, "2024/25 舞說木蘭(非元朗)", "129"]);
 //    
 //        checkBoxInfo['show'].push([2408, "2024/25 世一衝衝衝2.0", "205"]);
+//    
+//        checkBoxInfo['show'].push([2409, "2024/25 舞說木蘭(元朗)", "21"]);
 //    
 //        checkBoxInfo['show'].push([999, "沒有資料", "0"]);
 //    

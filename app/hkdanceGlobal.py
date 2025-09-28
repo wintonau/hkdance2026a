@@ -6,14 +6,14 @@ load_dotenv()
 config={}
 
 config['PATHSTATIC']='static/'
-config['QUALTRICS_DATAFILE_ONLINE']=config['PATHSTATIC']+"HKDANCE2023-online.sav"
-config['QUALTRICS_DATAFILE_PAPER']=config['PATHSTATIC']+"HKDANCE2023-paper.sav"
-config['HKDANCEDATAJSON']=config['PATHSTATIC']+'HKDANCE2023Data.json'
-config['HKDANCEDATAXLSX']=config['PATHSTATIC']+'HKDANCE2023Data.xlsx'
-config['HKDANCEDATAPICKLE']=config['PATHSTATIC']+'HKDANCE2023Data.pickle'
+config['QUALTRICS_DATAFILE_ONLINE']=config['PATHSTATIC']+"HKDANCE2025-online.sav"
+config['QUALTRICS_DATAFILE_PAPER']=config['PATHSTATIC']+"HKDANCE2025-paper.sav"
+config['HKDANCEDATAJSON']=config['PATHSTATIC']+'HKDANCE2025Data.json'
+config['HKDANCEDATAXLSX']=config['PATHSTATIC']+'HKDANCE2025Data.xlsx'
+config['HKDANCEDATAPICKLE']=config['PATHSTATIC']+'HKDANCE2025Data.pickle'
 config['HKDANCEVARLABELVALUEFILE']=config['PATHSTATIC']+'hkdanceVarLabelValue.xlsx'
-config['SUMMARYDATAEXCELFILE']=config['PATHSTATIC']+'HKDANCE2023-圖表數據.xlsx'
-config['COMMENTFILE']=config['PATHSTATIC']+'HKDANCE2023-觀眾意見.docx'
+config['SUMMARYDATAEXCELFILE']=config['PATHSTATIC']+'HKDANCE2025-圖表數據.xlsx'
+config['COMMENTFILE']=config['PATHSTATIC']+'HKDANCE2025-觀眾意見.docx'
 config['HKDANCEPPTTEMPLATE']=config['PATHSTATIC']+'hkdance2023_template.pptx'
 
 config['PATHTEMPLATE']='templates/'
