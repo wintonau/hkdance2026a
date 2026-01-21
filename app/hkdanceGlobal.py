@@ -14,7 +14,7 @@ config['HKDANCEDATAPICKLE']=config['PATHSTATIC']+'HKDANCE2025Data.pickle'
 config['HKDANCEVARLABELVALUEFILE']=config['PATHSTATIC']+'hkdanceVarLabelValue.xlsx'
 config['SUMMARYDATAEXCELFILE']=config['PATHSTATIC']+'HKDANCE2025-圖表數據.xlsx'
 config['COMMENTFILE']=config['PATHSTATIC']+'HKDANCE2025-觀眾意見.docx'
-config['HKDANCEPPTTEMPLATE']=config['PATHSTATIC']+'hkdance2023_template.pptx'
+config['HKDANCEPPTTEMPLATE']=config['PATHSTATIC']+'hkdance2025_template.pptx'
 
 config['PATHTEMPLATE']='templates/'
 config['RENDEREDHTMLFILENAME']=config['PATHTEMPLATE']+'rendered.html'
