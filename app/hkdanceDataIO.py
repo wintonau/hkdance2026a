@@ -604,9 +604,11 @@ def CreatePpt(fn, title, showList, sampleSize, d1, dx1):
     prs = Presentation(Path(glo.config['HKDANCEPPTTEMPLATE']))
     for thisSlide in prs.slides:
         for thisShape in thisSlide.shapes:
+            print("shape:", thisShape.shape_type, thisShape.alt_text)
             if (thisShape.shape_type==MSO_SHAPE_TYPE.CHART) and (thisShape.alt_text in results.keys()):
                 thisChart = thisShape.chart
                 thisVar = thisShape.alt_text
+                print("updating chart for ", thisVar)
                 
                 chartData=CategoryChartData()
                 if (results[thisVar]['sort']):
