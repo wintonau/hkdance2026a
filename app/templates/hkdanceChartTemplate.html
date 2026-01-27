@@ -168,13 +168,13 @@ p {
 
 
 
-            <a href="{{ url_for('static', filename='HKDANCE2025-全部.pptx') }}" download="HKDANCE2025-全部.pptx">               
+            <a href="{{ url_for('static', filename='HKDANCE2026-全部.pptx') }}" download="HKDANCE2026-全部.pptx">               
             <button class="button" type="button">&nbsp;下載圖表（全部）&nbsp;</button>
             </a><br>
-            <a href="{{ url_for('static', filename='HKDANCE2025-首次觀賞.pptx') }}" download="HKDANCE2025-學生.pptx">
+            <a href="{{ url_for('static', filename='HKDANCE2026-首次觀賞.pptx') }}" download="HKDANCE2026-學生.pptx">
             <button class="button" type="button">&nbsp;下載圖表（首次觀賞）&nbsp;</button>
             </a><br>
-            <a href="{{ url_for('static', filename='HKDANCE2025-非首次觀賞.pptx') }}" download="HKDANCE2025-非學生.pptx">
+            <a href="{{ url_for('static', filename='HKDANCE2026-非首次觀賞.pptx') }}" download="HKDANCE2026-非學生.pptx">
             <button class="button" type="button">&nbsp;下載圖表（非首次觀賞）&nbsp;</button>
             </a>
             <br><br>
@@ -183,14 +183,14 @@ p {
 
 
 
-            <a href="{{ url_for('static', filename='HKDANCE2025-圖表數據.xlsx') }}" download="HKDANCE2025-圖表數據.xlsx">
+            <a href="{{ url_for('static', filename='HKDANCE2026-圖表數據.xlsx') }}" download="HKDANCE2026-圖表數據.xlsx">
             <button  class="button" type="button">&nbsp;下載圖表數據&nbsp;</button>
             </a>
             <br><br>
 
 
 
-            <a href="{{ url_for('static', filename='HKDANCE2025-觀眾意見.docx') }}" download="HKDANCE2025-觀眾意見.docx">
+            <a href="{{ url_for('static', filename='HKDANCE2026-觀眾意見.docx') }}" download="HKDANCE2026-觀眾意見.docx">
             <button  class="button" type="button">&nbsp;下載觀眾意見&nbsp;</button>
             </a>
 
@@ -264,11 +264,6 @@ p {
 <canvas id="chartfirsttime" </canvas>
 </div>
 
-<div class="colChartContainer">
-<h2>{{ d100['numdance']['label'] }}</h2>
-<canvas id="chartnumdance" </canvas>
-</div>
-
 
 <div class="colChartContainer">
 <h2>{{ d100['buytixwhen']['label'] }}</h2>
@@ -317,26 +312,6 @@ p {
 <div class="colChartContainer">
 <h2>{{ dNot100['satTop1']['itemLabel'] }}</h2>
 <canvas id="chartsatTop1" ></canvas>
-</div>
-
-<div class="colChartContainer">
-<h2>{{ dNot100['fringe']['itemLabel'] }}</h2>
-<canvas id="chartfringe" ></canvas>
-</div>
-
-<div class="colChartContainer">
-<h2>{{ dNot100['fringeTop1']['itemLabel'] }}</h2>
-<canvas id="chartfringeTop1" ></canvas>
-</div>
-
-<div class="colChartContainer">
-<h2>{{ dNot100['otherart1']['itemLabel'] }}</h2>
-<canvas id="chartotherart1" ></canvas>
-</div>
-
-<div class="colChartContainer">
-<h2>{{ dNot100['otherart2']['itemLabel'] }}</h2>
-<canvas id="chartotherart2" </canvas>
 </div>
 
 
@@ -730,14 +705,6 @@ function SortByValue(cData) {
             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['income']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
             ]};
 
-	chartData['numdance'] = {
-        labels : [{% for key, value in d100['numdance']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
-        datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in d100['numdance']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in d100AAA['numdance']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in d100BBB['numdance']['optList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            ]};
-            
 
 	chartData['firsttime'] = {
         labels : [{% for key, value in d100['firsttime']['optList'].items() %} "{{ value['label'] }}", {% endfor %}],
@@ -816,22 +783,7 @@ function SortByValue(cData) {
             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['impactTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
             ]};
 
-        
-	chartData['otherart1'] = {
-        labels : [{% for key, value in dNot100['otherart1']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
-        datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['otherart1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['otherart1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['otherart1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            ]};
 
-	chartData['otherart2'] = {
-        labels : [{% for key, value in dNot100['otherart2']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
-        datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['otherart2']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['otherart2']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['otherart2']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            ]};
 
 	chartData['sat'] = {
         labels : [{% for key, value in dNot100['sat']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
@@ -850,24 +802,6 @@ function SortByValue(cData) {
             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['satTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
             ]};
 
-	chartData['fringe'] = {
-        labels : [{% for key, value in dNot100['fringe']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
-        datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['fringe']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['fringe']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['fringe']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            ]};
-
-
-	chartData['fringeTop1'] = {
-        labels : [{% for key, value in dNot100['fringeTop1']['varList'].items() %} "{{ value['label'] }}", {% endfor %}],
-        datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [{% for key, value in dNot100['fringeTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [{% for key, value in dNot100AAA['fringeTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [{% for key, value in dNot100BBB['fringeTop1']['varList'].items() %} "{{ value['yesPct'] }}", {% endfor %} ]},
-            ]};
-
-
     SortByValue(chartData["seeshowwhy"]);
     SortByValue(chartData["knowshowhow"]);
     SortByValue(chartData["seeshowwho"]);
@@ -877,11 +811,8 @@ function SortByValue(cData) {
     SortByValue(chartData["impactTop1"]);
     SortByValue(chartData["sat"]);
     SortByValue(chartData["satTop1"]);
-	SortByValue(chartData["fringe"]);
-    SortByValue(chartData["fringeTop1"]);
-   
-    SortByValue(chartData["otherart1"]);
-    SortByValue(chartData["otherart2"]);
+
+
     // SortByValue(chartData["aes"]);
     // SortByValue(chartData["aesdisagree"]);
 
@@ -910,9 +841,6 @@ function SortByValue(cData) {
 	var ctx = document.getElementById('chartincome');
 	jsChart['income'] = new Chart(ctx, {type: 'bar', data: chartData['income'], options: horBarOption});
 
-	var ctx = document.getElementById('chartnumdance');
-	jsChart['numdance'] = new Chart(ctx, {type: 'bar', data: chartData['numdance'], options: horBarOption});
-
 	var ctx = document.getElementById('chartfirsttime');
 	jsChart['firsttime'] = new Chart(ctx, {type: 'bar', data: chartData['firsttime'], options: horBarOption});
 
@@ -940,11 +868,6 @@ function SortByValue(cData) {
 	var ctx = document.getElementById('chartimpactTop1');
 	jsChart['impactTop1'] = new Chart(ctx, {type: 'bar', data: chartData['impactTop1'], options: horBarOption});
 
-	var ctx = document.getElementById('chartotherart1');
-	jsChart['otherart1'] = new Chart(ctx, {type: 'bar', data: chartData['otherart1'], options: horBarOption});
-
-	var ctx = document.getElementById('chartotherart2');
-	jsChart['otherart2'] = new Chart(ctx, {type: 'bar', data: chartData['otherart2'], options: horBarOption});
 
 	var ctx = document.getElementById('chartsat');
 	jsChart['sat'] = new Chart(ctx, {type: 'bar', data: chartData['sat'], options: horBarOption});
@@ -952,11 +875,6 @@ function SortByValue(cData) {
 	var ctx = document.getElementById('chartsatTop1');
 	jsChart['satTop1'] = new Chart(ctx, {type: 'bar', data: chartData['satTop1'], options: horBarOption});
 
-	var ctx = document.getElementById('chartfringe');
-	jsChart['fringe'] = new Chart(ctx, {type: 'bar', data: chartData['fringe'], options: horBarOption});
-
-	var ctx = document.getElementById('chartfringeTop1');
-	jsChart['fringeTop1'] = new Chart(ctx, {type: 'bar', data: chartData['fringeTop1'], options: horBarOption});
 
 	var ctx = document.getElementById('chartnps_0');
 	jsChart['nps_0'] = new Chart(ctx, {type: 'pie', data: chartData['nps_0'], options: pieOption});

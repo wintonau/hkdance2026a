@@ -29,17 +29,15 @@ import re
 from zoneinfo import ZoneInfo
 
 numericVar = [
-    'show', 'showtime', 'firsttime', 'numdance', 
-    'seeshowwhy_1', 'seeshowwhy_2', 'seeshowwhy_3', 'seeshowwhy_4', 'seeshowwhy_5', 'seeshowwhy_6', 'seeshowwhy_7', 'seeshowwhy_8', 'seeshowwhy_9', 'seeshowwhy_10', 'seeshowwhy_11', 'seeshowwhy_88', 
-    'seeshowwho_1', 'seeshowwho_2', 'seeshowwho_3', 'seeshowwho_4', 'seeshowwho_5', 'seeshowwho_88', 
+    'show', 'showtime', 'firsttime',  
+    'seeshowwhy_1', 'seeshowwhy_2', 'seeshowwhy_3', 'seeshowwhy_4', 'seeshowwhy_5', 'seeshowwhy_6', 'seeshowwhy_7', 'seeshowwhy_8', 'seeshowwhy_9', 'seeshowwhy_10', 'seeshowwhy_88', 
+    'seeshowwho_1', 'seeshowwho_2', 'seeshowwho_3', 'seeshowwho_4', 'seeshowwho_5', 
     'buytixwhat', 
     'buytixwhen', 
-    'knowshowhow_1', 'knowshowhow_2', 'knowshowhow_3', 'knowshowhow_4', 'knowshowhow_5', 'knowshowhow_6', 'knowshowhow_7', 
-    'knowshowhow_8', 'knowshowhow_9', 'knowshowhow_10', 'knowshowhow_11', 'knowshowhow_12', 'knowshowhow_13', 'knowshowhow_14', 'knowshowhow_15', 'knowshowhow_88', 
+    'knowshowhow_1', 'knowshowhow_2', 'knowshowhow_3', 'knowshowhow_4', 'knowshowhow_5', 'knowshowhow_6', 'knowshowhow_7', 'knowshowhow_8', 'knowshowhow_9', 'knowshowhow_10', 
+    'knowshowhow_11', 'knowshowhow_12', 'knowshowhow_13', 'knowshowhow_14', 'knowshowhow_15', 'knowshowhow_16', 'knowshowhow_17', 'knowshowhow_18','knowshowhow_88', 
     'impact_1', 'impact_2', 'impact_3', 
-    'sat_1', 'sat_2', 'sat_3', 'sat_4', 'sat_5', 'sat_6', 'sat_11', 
-    'fri_1', 'fri_2', 'fri_3',
-    'otherart_1', 'otherart_2', 'otherart_3', 'otherart_4', 'otherart_5', 
+    'sat_1', 'sat_2', 'sat_3', 'sat_4', 'sat_5', 'sat_6', 'sat_7', 
     'sex', 'age', 'language', 'industry', 'district', 'income', 'hkdancefriend', 'edm', 
     ]
 
@@ -201,7 +199,7 @@ def GetDataFromQualServer():
     
     
         for thisNumericVar in numericVar:
-            # print(thisNumericVar)
+            print(thisNumericVar)
             data[thisNumericVar]=data[thisNumericVar].fillna(MISSINGDATAVALUE).astype('int32')
             
         UpdateMissingFirsttimeAsNonFirsttime(data)
@@ -211,14 +209,14 @@ def GetDataFromQualServer():
         data['RecordedDate']=pandas.to_datetime(data['RecordedDate'])
         data["duplicate"]=0
     
-        data['showtime']=data['onetime_showtime'].where(data['onetime_showtime'].notnull(),data['showtime']) 
+        # data['showtime']=data['onetime_showtime'].where(data['onetime_showtime'].notnull(),data['showtime']) 
         data['show']=pandas.to_numeric(data['show'])
         data['comment']=data['comment'].str.replace("\n",LINEBREAKSTR)
         data['nps_why']=data['nps_why'].str.replace("\n",LINEBREAKSTR)
     
 
         
-        data['showtime']=data['onetime_showtime'].where(data['onetime_showtime'].notnull(),data['showtime']) 
+        # data['showtime']=data['onetime_showtime'].where(data['onetime_showtime'].notnull(),data['showtime']) 
         
         # data['showtime'] = data['showtime'].replace(250101, 240301)
         # data['showtime'] = data['showtime'].replace(250102, 240302)
@@ -228,11 +226,11 @@ def GetDataFromQualServer():
         # data['showtime'] = data['showtime'].replace(250203, 240403)
         # data['showtime'] = data['showtime'].replace(250204, 240404)
         
-        data.loc[data['showtime'] == 240705, 'show'] = 2409
-        data.loc[data['showtime'] == 240705, 'showtime'] = 240905
+        # data.loc[data['showtime'] == 240705, 'show'] = 2409
+        # data.loc[data['showtime'] == 240705, 'showtime'] = 240905
         
-        data.loc[data['showtime'] == 240706, 'show'] = 2409
-        data.loc[data['showtime'] == 240706, 'showtime'] = 240906
+        # data.loc[data['showtime'] == 240706, 'show'] = 2409
+        # data.loc[data['showtime'] == 240706, 'showtime'] = 240906
 
 
         
@@ -517,7 +515,7 @@ def WriteOneGroup2WorkSheet(ws, title, sampleSize, d1, dx1, startCol):
         rowdx+=5
 
     rowdx+=3
-    for feedback in ['impact', 'sat', 'impactTop1', 'satTop1', 'fringe', 'fringeTop1']:
+    for feedback in ['impact', 'sat', 'impactTop1', 'satTop1']:
         rowdx+=2
         ws.cell(rowdx, startCol).value=dx1[feedback]['itemLabel']
         ws.cell(rowdx, startCol).alignment=xlAlignment(horizontal="left")
