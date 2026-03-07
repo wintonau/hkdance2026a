@@ -141,7 +141,7 @@ def GetQualtricSurveySPSS(fn, xapitoken, surveyId):
                         localfile.write(response.content)
                     
                 except:
-                    print("error in downaloading data file")
+                    print(f"error in downaloading data file: {e!r}")
                     time.sleep(time_sleep)
                     time_lapse = time_lapse + time_sleep
                     if time_lapse > time_max:

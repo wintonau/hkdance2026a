@@ -1,6 +1,5 @@
 import requests
 import time
-import hkrepGlobal as glo
 import pandas
 import os
 
@@ -44,8 +43,8 @@ def GetQualtricSurveySPSS(fn, xapitoken, surveyId):
                     )
                 print(time_lapse)
                 rj=response.json()
-            except:
-                print("error making a request to qualtrics for fileId")
+            except Exception as e:
+                print(f"error making a request to qualtrics for fileId: {e!r}")
             else:
                 print("response to fileID request received")
                 print(time_lapse)
@@ -82,8 +81,8 @@ def GetQualtricSurveySPSS(fn, xapitoken, surveyId):
                     with open(fn, mode='wb') as localfile:
                         localfile.write(response.content)
                     
-                except:
-                    print("error in downaloading data file")
+                except Exception as e:
+                    print(f"error in downaloading data file: {e!r}")
                     time.sleep(time_sleep)
                     time_lapse = time_lapse + time_sleep
                     if time_lapse > time_max:
@@ -106,9 +105,6 @@ def GetQualtricSurveySPSS(fn, xapitoken, surveyId):
 xapitoken = 'SwTiZTtFzkQIrXxkGIKRLpohiYcbyAyoEmu22LjQ'
 
 surveyId = 'SV_6kTCiQjvvXAEB3o'
-data1=GetQualtricSurveySPSS(glo.config['QUALTRICS_DATAFILE_ONLINE'],xapitoken, surveyId)
+data1=GetQualtricSurveySPSS("HKDANCE2026-online.sav",xapitoken, surveyId)
 print(data1)
                       
-surveyId = 'SV_07mZtVRrFyy6Mp8'
-data2=GetQualtricSurveySPSS(glo.config['QUALTRICS_DATAFILE_PAPER'],xapitoken, surveyId)
-print(data2)
