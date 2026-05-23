@@ -195,7 +195,7 @@ p {
             </a>
 
             <br><br>
-            <p><small>現時數據<br>2026-01-27　13:30</small><p>
+            <p><small>現時數據<br>2026-05-23　18:49</small><p>
             <input type="checkbox" id="cbRenewData" name="renewDataYN" value="Yes">
             <label for="cbRenewData"><small>更新數據</small></label>
             <br><br>
@@ -605,13 +605,13 @@ function SortByValue(cData) {
 
     var chartData={};
 
-    const titleFull="全部 (1)";
-    const titleAAA="全部 (1)";
-    const titleBBB="全部 (1)";
+    const titleFull="全部 (10)";
+    const titleAAA="非首次 (8)";
+    const titleBBB="首次 (2)";
     
     
     const checkBoxChosen={};
-    checkBoxChosen['show']=new Set([ ]);
+    checkBoxChosen['show']=new Set([ 2504,  ]);
     // checkBoxChosen['firsttime']=new Set([  0,  ]);
     checkBoxChosen['firsttime']=new Set([  0,  1,  ]);
 
@@ -629,9 +629,9 @@ function SortByValue(cData) {
              "推薦者",  "被動者",  "批評者", 
             ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...pieColorFull, data : [ "1.0",  "0.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...pieColorAAA, data : [ "1.0",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...pieColorBBB, data : [ "1.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...pieColorFull, data : [ "0.1",  "0.8",  "0.1",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...pieColorAAA, data : [ "0.125",  "0.75",  "0.125",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...pieColorBBB, data : [ "0.0",  "1.0",  "0.0",  ]},
             ]};
 
     chartData['nps_0']['labels'][0]=titleFull+":"+chartData['nps_0']['labels'][0];
@@ -641,76 +641,76 @@ function SortByValue(cData) {
 	chartData['nps_2'] = {
         labels : [ "淨推薦值", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "1.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "1.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  ]},
             ]};
 
 
 	chartData['showtime'] = {
-        labels : [ "06.03.2026 (五) 晚上 ",  "07.03.2026 (六) 下午 ",  "07.03.2026 (六) 晚上 ",  "08.03.2026 (⽇) 下午 ",  "show 2504 show time 1",  "show 2504 show time 2",  "show 2504 show time 3",  "show 2505 show time 1",  "show 2505 show time 2",  "show 2505 show time 3",  "沒有資料", ],
+        labels : [ "show 2504 show time 1",  "show 2504 show time 2",  "show 2504 show time 3",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.4",  "0.6",  "0.0",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.375",  "0.625",  "0.0",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.5",  "0.5",  "0.0",  "0.0",  ]},
             ]};
 
             
 	chartData['sex'] = {
         labels : [ "男",  "女",  "非二元",  "不願透露",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.1",  "0.9",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.125",  "0.875",  "0.0",  "0.0",  "0.0",  ]},
             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  ]},
             ]};
             
 	chartData['age'] = {
         labels : [ "21歲或以下",  "22-35",  "36-50",  "51-64",  "65歲或以上",  "不願透露",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.4",  "0.3",  "0.2",  "0.1",  "0.0",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.375",  "0.25",  "0.25",  "0.125",  "0.0",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.5",  "0.5",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
             ]};
 
 
 	chartData['industry'] = {
         labels : [ "藝術文化/創意產業",  "專業服務",  "廣告/市場推廣",  "餐旅業",  "零售批發",  "資訊科技",  "政府部門/公務人員",  "教育",  "公共服務業",  "退休",  "照顧家庭",  "學生",  "其他，請註明：",  "不願透露",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.3",  "0.1",  "0.0",  "0.0",  "0.0",  "0.0",  "0.1",  "0.2",  "0.0",  "0.1",  "0.0",  "0.0",  "0.1",  "0.1",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.25",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.125",  "0.25",  "0.0",  "0.125",  "0.0",  "0.0",  "0.125",  "0.125",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.5",  "0.5",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
             ]};
 
 	chartData['district'] = {
         labels : [ "中西區",  "東區",  "南區",  "灣仔區",  "九龍城區",  "觀塘區",  "深水埗區",  "黃大仙區",  "油尖旺區",  "離島區",  "葵青區",  "北區",  "西貢區",  "沙田區",  "大埔區",  "荃灣區",  "屯門區",  "元朗區",  "其他，請註明：",  "不願透露",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.1",  "0.2",  "0.0",  "0.0",  "0.1",  "0.1",  "0.0",  "0.0",  "0.1",  "0.0",  "0.1",  "0.1",  "0.0",  "0.1",  "0.0",  "0.0",  "0.0",  "0.1",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.125",  "0.25",  "0.0",  "0.0",  "0.125",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.125",  "0.125",  "0.0",  "0.125",  "0.0",  "0.0",  "0.0",  "0.125",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.5",  "0.0",  "0.0",  "0.5",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
             ]};
 
 	chartData['language'] = {
         labels : [ "廣東話",  "普通話",  "英文",  "其他，請註明：",  "不願透露",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.9",  "0.1",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.875",  "0.125",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
             ]};
 
 	chartData['income'] = {
         labels : [ "&lt; $30,000",  "$30,001-$50,000",  "$50,001-$70,000",  "&gt; $70,001",  "不適用",  "不願透露",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.5",  "0.1",  "0.2",  "0.0",  "0.1",  "0.1",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.5",  "0.0",  "0.25",  "0.0",  "0.125",  "0.125",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.5",  "0.5",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
             ]};
 
 
 	chartData['firsttime'] = {
         labels : [ "非首次",  "首次",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "1.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "1.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.8",  "0.2",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "1.0",  "0.0",  "0.0",  ]},
             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "1.0",  "0.0",  ]},
             ]};
 
@@ -718,25 +718,25 @@ function SortByValue(cData) {
 	chartData['hkdancefriend'] = {
         labels : [ "已是會員",  "曾經是會員",  "非會員",  "沒有資料", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "1.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "1.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.2",  "0.1",  "0.7",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.25",  "0.125",  "0.625",  "0.0",  ]},
             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "1.0",  "0.0",  ]},
             ]};
             
  	chartData['buytixwhen'] = {
          labels : [ "舞季/早鳥預訂票",  "演出前兩至三個月",  "演出前一個月",  "演出前一至兩個星期",  "演出當天",  "不適用",  "沒有資料", ],
          datasets : [
-             {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  ]},
-             {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  ]},
-             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  ]},
+             {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.2",  "0.2",  "0.3",  "0.3",  "0.0",  "0.0",  "0.0",  ]},
+             {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.25",  "0.25",  "0.375",  "0.125",  "0.0",  "0.0",  "0.0",  ]},
+             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  ]},
              ]};
              
  	chartData['buytixwhat'] = {
          labels : [ "正價門票",  "半價優惠門票（長者、學生等）",  "優惠門票",  "贈票--香港舞蹈團",  "贈票--學校/社區團體",  "贈票--贊助商",  "沒有資料", ],
          datasets : [
-             {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  ]},
-             {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  ]},
-             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  ]},
+             {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.6",  "0.2",  "0.1",  "0.1",  "0.0",  "0.0",  "0.0",  ]},
+             {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.5",  "0.25",  "0.125",  "0.125",  "0.0",  "0.0",  "0.0",  ]},
+             {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
              ]};                     
         
             
@@ -744,43 +744,43 @@ function SortByValue(cData) {
 	chartData['knowshowhow'] = {
         labels : [ "學校、機構推介",  "親人、朋友推介",  "宣傳單張，請註明索取自：",  "戶外廣告--港鐵",  "戶外廣告--巴士",  "戶外廣告--電車",  "戶外廣告--天星小輪",  "戶外廣告--商場",  "戶外廣告--隧道大型廣告牌",  "戶外廣告--街頭橫額",  "演出場地展示的宣傳廣告",  "媒體報導",  "香港舞蹈團網站",  "網上平台的廣告",  "社交平台（如Facebook、Instagram、小紅書、抖音、微信等）",  "電子通訊",  "展覽",  "周邊活動",  "其他", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "0.0",  "0.3",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.5",  "0.0",  "0.4",  "0.3",  "0.5",  "0.2",  "0.0",  "0.0",  "0.1",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "0.0",  "0.25",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.625",  "0.0",  "0.5",  "0.375",  "0.5",  "0.25",  "0.0",  "0.0",  "0.125",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "0.5",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.5",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
             ]};
 
 	chartData['seeshowwhy'] = {
         labels : [ "香港舞蹈團",  "創作團隊",  "節目題材",  "場地",  "學校/機構/親友推介",  "愛好舞蹈",  "消磨時間",  "媒體報導",  "宣傳推廣（演出介紹、圖片、照片或預告片吸引）",  "演出者親友",  "其他", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.6",  "0.5",  "0.9",  "0.1",  "0.0",  "0.2",  "0.1",  "0.0",  "0.4",  "0.1",  "0.0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.75",  "0.5",  "0.875",  "0.0",  "0.0",  "0.25",  "0.125",  "0.0",  "0.25",  "0.125",  "0.0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.5",  "1.0",  "0.5",  "0.0",  "0.0",  "0.0",  "0.0",  "1.0",  "0.0",  "0.0",  ]},
             ]};
 
 
 	chartData['seeshowwho'] = {
         labels : [ "自己",  "伴侶",  "子女",  "朋友",  "其他家庭成員/親戚",  "其他", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "1.0",  "0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "1.0",  "0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "1.0",  "1.0",  "0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.4",  "0.0",  "0.0",  "0.2",  "0.4",  "0",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.375",  "0.0",  "0.0",  "0.25",  "0.375",  "0",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.5",  "0.0",  "0.0",  "0.0",  "0.5",  "0",  ]},
             ]};
 
 	chartData['impact'] = {
         labels : [ "演出加深了我對香港舞蹈團的了解",  "演出增添了我對舞蹈的興趣",  "我想觀賞更多香港舞蹈團的舞蹈作品", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "1.0",  "1.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "1.0",  "1.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "1.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "1.0",  "0.8",  "0.9",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "1.0",  "1.0",  "0.875",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "0.0",  "1.0",  ]},
             ]};
             
 
 	chartData['impactTop1'] = {
         labels : [ "演出加深了我對香港舞蹈團的了解",  "演出增添了我對舞蹈的興趣",  "我想觀賞更多香港舞蹈團的舞蹈作品", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "1.0",  "0.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "1.0",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.4",  "0.3",  "0.4",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.375",  "0.375",  "0.5",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.5",  "0.0",  "0.0",  ]},
             ]};
 
 
@@ -788,18 +788,18 @@ function SortByValue(cData) {
 	chartData['sat'] = {
         labels : [ "導演/編舞",  "音樂",  "題材",  "舞蹈員",  "舞台美術（佈景/道具、燈光 、音響、服裝、化妝）",  "宣傳照/宣傳片",  "整體效果", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "1.0",  "1.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "1.0",  "1.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "1.0",  "1.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "1.0",  "0.9",  "1.0",  "1.0",  "0.9",  "0.6",  "0.9",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "1.0",  "0.875",  "1.0",  "1.0",  "0.875",  "0.625",  "0.875",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "1.0",  "1.0",  "1.0",  "1.0",  "0.5",  "1.0",  ]},
             ]};
 
 
 	chartData['satTop1'] = {
         labels : [ "導演/編舞",  "音樂",  "題材",  "舞蹈員",  "舞台美術（佈景/道具、燈光 、音響、服裝、化妝）",  "宣傳照/宣傳片",  "整體效果", ],
         datasets : [
-            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
-            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  "0.0",  ]},
+            {hidden: !displayOverall, label : titleFull, ...barColorFull, data : [ "0.7",  "0.5",  "0.5",  "0.6",  "0.4",  "0.3",  "0.6",  ]},
+            {hidden: !displayFirst, label : titleAAA, ...barColorAAA, data : [ "0.625",  "0.5",  "0.625",  "0.625",  "0.5",  "0.375",  "0.625",  ]},
+            {hidden: !displaySecond,label : titleBBB, ...barColorBBB, data : [ "1.0",  "0.5",  "0.0",  "0.5",  "0.0",  "0.0",  "0.5",  ]},
             ]};
 
     SortByValue(chartData["seeshowwhy"]);
@@ -885,6 +885,40 @@ function SortByValue(cData) {
 
     var numListCom = document.getElementById("numberedListComments");
     var theList=[];
+    
+        theList.push("<li>" + "可以不用人聲演唱；__LINEBREAK____LINEBREAK__最好不要用西西女士的「我城」。__LINEBREAK__"+ "</li><br>");
+    
+        theList.push("<li>" + "特別欣賞配樂細緻，例如在《我城》的配樂聽到噪鵑、麻雀等香港常見雀鳥的叫聲。"+ "</li><br>");
+    
+        theList.push("<li>" + "視、聽覺藝術配合得很精彩，很享受這次表演。"+ "</li><br>");
+    
+        theList.push("<li>" + "見前個問題的答案"+ "</li><br>");
+    
+        theList.push("<li>" + "驚喜"+ "</li><br>");
+    
+        theList.push("<li>" + "結尾的彩球畫面很美，只是有點擔心舞蹈員踩到受傷"+ "</li><br>");
+    
+        theList.push("<li>" + "Love the live Erhu (actually was it Altro Erhu?) and viola too!"+ "</li><br>");
+    
+        theList.push("<li>" + "會"+ "</li><br>");
+    
+        theList.push("<li>" + "很好的觀賞體驗，可以欣賞舞蹈的多元、力量。與演奏配合得很好。__LINEBREAK____LINEBREAK__"+ "</li><br>");
+    
+        theList.push("<li>" + "The dance truly expressed a beautiful painting through simplicity and seamlessly graceful movements."+ "</li><br>");
+    
+        theList.push("<li>" + "我會向朋友推薦看這個演出，音樂、中國水墨畫和舞蹈所結合的演出藝術很精彩。音樂動聽有感染力，舞蹈編排結合視像設計配合得很有詩意。"+ "</li><br>");
+    
+        theList.push("<li>" + "題材意想不到，編舞有創意也很符合吳冠中的作品，但舞者之間的協調尤其節奏方面略嫌不足，雖然部分獨舞者可看出功底深厚。"+ "</li><br>");
+    
+        theList.push("<li>" + "好睇，感動"+ "</li><br>");
+    
+        theList.push("<li>" + "Enchanted experience"+ "</li><br>");
+    
+        theList.push("<li>" + "The performing time is a bit short, not too worth!"+ "</li><br>");
+    
+        theList.push("<li>" + "編舞和配樂精采"+ "</li><br>");
+    
+        theList.push("<li>" + "Love how the philosophy of painting has been brought out by the dance, so that two dimensional visual images have been turned into three dimensional moving spirits. The forms presented by the dancers echo elements of the painting and the spacial shift of the stage is really fascinating!"+ "</li><br>");
     
     var tempList= "<ol>" + theList.join('')+ "</ol>";
     tempList=tempList.replace(/__LINEBREAK__/g,'<br>');
@@ -1008,7 +1042,7 @@ function downloadPDF() {
 
 	thisPDF.setFontSize(8);
     thisPDF.setTextColor(40, 40, 40);
-    thisPDF.text(xFooter, yFooter, "2026-01-27　13:30");
+    thisPDF.text(xFooter, yFooter, "2026-05-23　18:49");
 
 	var pageNumber=0;
 	for (var k in jsChart) {
@@ -1036,7 +1070,7 @@ function downloadPDF() {
         	thisPDF.setFontSize(8);
             thisPDF.setTextColor(40,40,40);
     		thisPDF.text(xHeader, yHeader, "香港舞蹈團 "+pageNumber.toString());
-    		thisPDF.text(xFooter, thisFooter, "2026-01-27　13:30");
+    		thisPDF.text(xFooter, thisFooter, "2026-05-23　18:49");
             thisPDF.setFontSize(16);
         	thisPDF.setTextColor(205, 92, 92);
     		thisPDF.text(xTitle, yTitle, chartTitle[k]);
@@ -1053,7 +1087,7 @@ function downloadPDF() {
     	thisPDF.setFontSize(8);
         thisPDF.setTextColor(40,40,40);
         thisPDF.text(xHeader, yHeader, "香港舞蹈團 "+pageNumber.toString());
-        thisPDF.text(xFooter, Math.floor(pdfWidth*0.9), "2026-01-27　13:30");
+        thisPDF.text(xFooter, Math.floor(pdfWidth*0.9), "2026-05-23　18:49");
         thisPDF.setFontSize(16);
     	thisPDF.setTextColor(205, 92, 92);
     	thisPDF.text(xTitle, yTitle, chartTitle[datadx]);
@@ -1085,8 +1119,8 @@ function downloadPDF() {
     
         checkBoxInfo['show'].push([
             2504,
-            "show 2504",
-            "0"
+            "《之間──吳冠中水墨行》",
+            "10"
             ]);
     
         checkBoxInfo['show'].push([
@@ -1130,7 +1164,7 @@ function downloadPDF() {
 //    
 //        checkBoxInfo['show'].push([2503, "《跡》", "1"]);
 //    
-//        checkBoxInfo['show'].push([2504, "show 2504", "0"]);
+//        checkBoxInfo['show'].push([2504, "《之間──吳冠中水墨行》", "10"]);
 //    
 //        checkBoxInfo['show'].push([2505, "show 2505", "0"]);
 //    
@@ -1149,9 +1183,9 @@ function downloadPDF() {
 
     checkBoxInfo['firsttime']=[];
     
-        checkBoxInfo['firsttime'].push([0, "非首次", "0"]);
+        checkBoxInfo['firsttime'].push([0, "非首次", "8"]);
     
-        checkBoxInfo['firsttime'].push([1, "首次", "1"]);
+        checkBoxInfo['firsttime'].push([1, "首次", "3"]);
     
         checkBoxInfo['firsttime'].push([999, "沒有資料", "0"]);
     
