@@ -17,6 +17,7 @@ COPY ./app /app
 
 ENV FLASK_APP=hkdance.py
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/app
 CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=8000" ]
 
 
