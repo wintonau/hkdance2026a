@@ -2,8 +2,10 @@ FROM python:3.12
 WORKDIR /app
 
 # Copy requirements.txt and install dependencies
+
 COPY requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip \
+	&& pip install setuptools wheel \
 	&& pip install -r requirements.txt
 
 # Copy application code (including your own pptx package)
