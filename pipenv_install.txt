@@ -5,7 +5,6 @@ pipenv install pandas
 pipenv install pathlib2
 pipenv install psycopg2
 pipenv install python-docx
-pipenv install python-pptx
 pipenv install python-dotenv
 pipenv install requests
 pipenv install DateTime
