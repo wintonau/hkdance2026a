@@ -1,27 +1,33 @@
-import collections
+import hkdanceGlobal as glo
+# import QualtricsAPI
+import logging
+import pandas
+import os.path
+import openpyxl
+from openpyxl.styles import Alignment as xlAlignment, Font as xlFont
+from pathlib import Path
+from math import floor
 import copy
 import datetime
-import logging
-import os.path
-import re
-import time
-from math import floor
-from pathlib import Path
-from zoneinfo import ZoneInfo
-
 import docx
-import openpyxl
-import pandas
-import pyreadstat
-import requests
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Inches, Pt
-from openpyxl.styles import Alignment as xlAlignment, Font as xlFont
+
+import requests
+import time
+import pyreadstat
+import collections
+
 from pptx import Presentation
 from pptx.chart.data import CategoryChartData
 from pptx.enum.shapes import MSO_SHAPE_TYPE
+# from pptx.util import Pt
+# from pptx.enum.text import PP_ALIGN
+# from collections.abc import Mapping
 
-import hkdanceGlobal as glo
+import re
+# import pytz
+from zoneinfo import ZoneInfo
 
 logger = logging.getLogger(__name__)
 
@@ -94,9 +100,6 @@ def GetQualtricSurveySPSS(fn, xapitoken, surveyId):
                 progress_url, headers=headers, json=json_data, timeout=30)
             response.raise_for_status()
             progress_data = response.json()
-        except requests.HTTPError as exc:
-            raise RuntimeError(
-                "Qualtrics returned an HTTP error while checking export progress") from exc
         except requests.RequestException as exc:
             logger.warning("Unable to check Qualtrics export progress: %s", exc)
         else:
@@ -116,9 +119,6 @@ def GetQualtricSurveySPSS(fn, xapitoken, surveyId):
         try:
             response = requests.get(download_url, headers=headers, timeout=30)
             response.raise_for_status()
-        except requests.HTTPError as exc:
-            raise RuntimeError(
-                "Qualtrics returned an HTTP error while downloading the response export") from exc
         except requests.RequestException as exc:
             logger.warning("Unable to download the Qualtrics response export: %s", exc)
         else:
@@ -700,4 +700,6 @@ def ExtractComment(data, showList, firsttimeList, varname):
             print(this_comment[1])
             non_empty_comment.append(this_comment)
     return non_empty_comment
+
+
 
