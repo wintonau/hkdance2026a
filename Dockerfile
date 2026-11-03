@@ -11,7 +11,8 @@ RUN pip install --upgrade pip \
 
 # Copy application code (including your own pptx package)
 COPY ./app /app
-RUN cp /app/shared.py /app/pptx/oxml/shapes/shared.py \
+RUN mkdir -p /app/pptx/oxml/shapes /app/pptx/shapes \
+	&& cp /app/shared.py /app/pptx/oxml/shapes/shared.py \
 	&& cp /app/base.py /app/pptx/shapes/base.py
 RUN test -f /app/pptx/oxml/chart/axis.py
 RUN test -f /app/pptx/oxml/shapes/shared.py
@@ -24,6 +25,5 @@ ENV FLASK_APP=hkdance.py
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONPATH=/app
 CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=8000" ]
-
 
 
