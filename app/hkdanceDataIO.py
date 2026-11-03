@@ -602,7 +602,7 @@ def CreatePpt(fn, title, showList, sampleSize, d1, dx1):
     prs = Presentation(Path(glo.config['HKDANCEPPTTEMPLATE']))
     for thisSlide in prs.slides:
         for thisShape in thisSlide.shapes:
-            print("shape:", thisShape.shape_type, thisShape.alt_text)
+            # print("shape:", thisShape.shape_type, thisShape.alt_text)
             if (thisShape.shape_type==MSO_SHAPE_TYPE.CHART) and (thisShape.alt_text in results.keys()):
                 thisChart = thisShape.chart
                 thisVar = thisShape.alt_text
@@ -711,6 +711,7 @@ def WriteComment2Word(showList, d1, listComment):
             doc.add_heading(d1['show']['optList'][c[0]]['label'], 2)
         current_show=c[0]
         if len(c[1])>0:
+            print(c[1])
             doc.add_paragraph(c[1].replace(LINEBREAKSTR, "\n"), style='listCommentIndent')
 
 
@@ -725,6 +726,7 @@ def ExtractComment(data, showList, firsttimeList, varname):
     non_empty_comment=[]
     for this_comment in all_comment:
         if this_comment[1]!="":
+            print(this_comment[1])
             non_empty_comment.append(this_comment)
     return non_empty_comment
 
