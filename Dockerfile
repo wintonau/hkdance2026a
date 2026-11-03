@@ -11,7 +11,10 @@ RUN pip install --upgrade pip \
 
 # Copy application code (including your own pptx package)
 COPY ./app /app
+RUN cp /app/shared.py /app/pptx/oxml/shapes/shared.py \
+	&& cp /app/base.py /app/pptx/shapes/base.py
 RUN test -f /app/pptx/oxml/chart/axis.py
+RUN test -f /app/pptx/oxml/shapes/shared.py
 #COPY ./app/shared.py /usr/local/lib/python3.12/site-packages/pptx/oxml/shapes/
 #COPY ./app/base.py /usr/local/lib/python3.12/site-packages/pptx/shapes/
 #COPY ./app/collections /usr/local/lib/python3.10/collections
