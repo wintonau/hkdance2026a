@@ -108,9 +108,8 @@ input[type=text], input[type=password] {
         }
     
     if ("{{loginStatus}}" == "badpassword") {
-        tagLogin.value = "{{lastLogin}}";
+        tagLogin.value = {{ lastLogin|tojson }};
         tagPassword.placeholder = "Password is incorrect";
         }
         
 </script>
-

@@ -35,8 +35,10 @@ def DeleteLogin(thisLogin):
         s.commit()
 
 def PasswordCorrectORM(thisLogin, thisPassword):
-    pw =QueryLogin(thisLogin).password
-    return bcrypt.check_password_hash(pw, thisPassword)
+    account = QueryLogin(thisLogin)
+    if account is None:
+        return False
+    return bcrypt.check_password_hash(account.password, thisPassword)
 
 def AddLoginORM(thisLogin, thisPassword, thisshowallowed):
 

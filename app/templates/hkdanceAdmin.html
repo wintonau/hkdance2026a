@@ -66,25 +66,12 @@
 
 <script>
 
-document.getElementById('message_login').innerHTML='{{message_login}}';
-document.getElementById('message_upload').innerHTML='{{message_upload}}';
+document.getElementById('message_login').textContent={{ message_login|tojson }};
+document.getElementById('message_upload').textContent={{ message_upload|tojson }};
 
 
-const all_list_info={}; 
-                
-{% for k1, v1 in all_list_info.items() %}
-
-    all_list_info['{{k1}}']=[];
-
-    {% for pair in v1 %} 
-        all_list_info['{{k1}}'].push(['{{pair[0]}}', '{{pair[1]}}']);
-    {% endfor %}
-        
-{% endfor %}
-
-   
-
-var current_user='{{user2check}}';
+const all_list_info={{ all_list_info|tojson }};
+var current_user={{ user2check|tojson }};
 const current_user_allowed={};
 
 current_user_allowed['show']=new Set([ {% for x in user_allowed %} {{x}}, {% endfor %} ]); 

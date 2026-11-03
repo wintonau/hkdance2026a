@@ -1,32 +1,29 @@
-import hkdanceGlobal as glo
-# import QualtricsAPI
-import pandas
-import os.path
-import openpyxl
-from openpyxl.styles import Alignment as xlAlignment, Font as xlFont
-from pathlib import Path
-from math import floor
+import collections
 import copy
 import datetime
+import logging
+import os.path
+import re
+import time
+from math import floor
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
 import docx
+import openpyxl
+import pandas
+import pyreadstat
+import requests
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Inches, Pt
-
-import requests
-import time
-import pyreadstat
-
+from openpyxl.styles import Alignment as xlAlignment, Font as xlFont
 from pptx import Presentation
 from pptx.chart.data import CategoryChartData
 from pptx.enum.shapes import MSO_SHAPE_TYPE
-# from pptx.util import Pt
-# from pptx.enum.text import PP_ALIGN
-# from collections.abc import Mapping
-import collections.abc
 
-import re
-# import pytz
-from zoneinfo import ZoneInfo
+import hkdanceGlobal as glo
+
+logger = logging.getLogger(__name__)
 
 numericVar = [
     'show', 'showtime', 'firsttime',  
@@ -67,96 +64,73 @@ def DeleteLocalData():
         os.remove(glo.config['HKDANCEDATAPICKLE'])
 
 def GetQualtricSurveySPSS(fn, xapitoken, surveyId):
-    
     time_sleep = 0.1
     time_max = 40
-    data=pandas.DataFrame({'A' : []})
+    headers = {
+        'Content-Type': 'application/json',
+        'X-API-TOKEN': xapitoken,
+        'charset': 'UTF-8',
+    }
+    json_data = {"format": "spss", "compress": False}
+    base_url = f'https://yul1.qualtrics.com/API/v3/surveys/{surveyId}/export-responses'
 
-    fileId_not_found = True
-    headers = {'Content-Type': 'application/json', 'X-API-TOKEN': xapitoken,  'charset': 'UTF-8'}
-    json_data = {"format": "spss", "compress" : False}
-    
-    response = requests.post(
-        'https://yul1.qualtrics.com/API/v3/surveys/' + surveyId + '/export-responses',
-        headers=headers,
-        json=json_data,
-        )
-    
-    rj=response.json()
-    if (rj['meta']['httpStatus'] == '200 - OK'):
-        progressId = rj['result']['progressId']
-        print(progressId)
-    
-        headers = {
-            'Content-Type': 'application/json',
-            'X-API-TOKEN': xapitoken,
-            }
-        
-        time_lapse = 0 
+    try:
+        response = requests.post(
+            base_url, headers=headers, json=json_data, timeout=30)
+        response.raise_for_status()
+        response_data = response.json()
+    except requests.RequestException as exc:
+        raise RuntimeError("Unable to start the Qualtrics response export") from exc
 
-        fileId_not_found = True
-        while fileId_not_found:
-            try:
-                response = requests.get(
-                    'https://yul1.qualtrics.com/API/v3/surveys/' + surveyId + '/export-responses/' + progressId,
-                    headers=headers,
-                    json=json_data,
-                    )
-                print(time_lapse)
-                rj=response.json()
-            except:
-                print("error making a request to qualtrics for fileId")
-            else:
-                print("response to fileID request received")
-                print(time_lapse)
+    if response_data.get('meta', {}).get('httpStatus') != '200 - OK':
+        raise RuntimeError("Qualtrics rejected the response export request")
 
-            
-                
-            
-            if (rj['meta']['httpStatus'] == '200 - OK'):
-                if (rj['result']['percentComplete'] == 100):
-                    fileId = rj['result']['fileId']
-                    percentcomplete = rj['result']['percentComplete']
-                    print(fileId)
-                    print(percentcomplete)
-                    fileId_not_found = False
-                
-            if fileId_not_found:
-                time.sleep(time_sleep)
-                time_lapse = time_lapse + time_sleep
-                if time_lapse > time_max:
-                    break
-        
-        if fileId_not_found==False:
-            headers = {'Content-Type': 'application/json', 'X-API-TOKEN': xapitoken}
-            file_not_found = True
-            time_lapse = 0 
-            while file_not_found:
-                try:
-                    response = requests.get(
-                        'https://yul1.qualtrics.com/API/v3/surveys/' + surveyId + '/export-responses/' + fileId + '/file',
-                        headers=headers,
-                    )
-                    with open(fn, mode='wb') as localfile:
-                        localfile.write(response.content)
-                    
-                except:
-                    print(f"error in downaloading data file: {e!r}")
-                    time.sleep(time_sleep)
-                    time_lapse = time_lapse + time_sleep
-                    if time_lapse > time_max:
-                        break
-                else:
-                    file_not_found = False
-                    print("data file downloaded successfully")
-                    print(time_lapse)
-        
-                    
-        
-        if file_not_found==False:
-            if os.path.isfile(fn):
-                data, meta=pyreadstat.read_sav(fn, apply_value_formats=False)
-            
+    progress_id = response_data['result']['progressId']
+    deadline = time.monotonic() + time_max
+    progress_url = f'{base_url}/{progress_id}'
+    while True:
+        try:
+            response = requests.get(
+                progress_url, headers=headers, json=json_data, timeout=30)
+            response.raise_for_status()
+            progress_data = response.json()
+        except requests.HTTPError as exc:
+            raise RuntimeError(
+                "Qualtrics returned an HTTP error while checking export progress") from exc
+        except requests.RequestException as exc:
+            logger.warning("Unable to check Qualtrics export progress: %s", exc)
+        else:
+            if progress_data.get('meta', {}).get('httpStatus') != '200 - OK':
+                raise RuntimeError("Qualtrics returned an error while exporting responses")
+            if progress_data['result']['percentComplete'] == 100:
+                file_id = progress_data['result']['fileId']
+                break
+
+        if time.monotonic() >= deadline:
+            raise TimeoutError("Timed out waiting for the Qualtrics response export")
+        time.sleep(time_sleep)
+
+    download_url = f'{base_url}/{file_id}/file'
+    deadline = time.monotonic() + time_max
+    while True:
+        try:
+            response = requests.get(download_url, headers=headers, timeout=30)
+            response.raise_for_status()
+        except requests.HTTPError as exc:
+            raise RuntimeError(
+                "Qualtrics returned an HTTP error while downloading the response export") from exc
+        except requests.RequestException as exc:
+            logger.warning("Unable to download the Qualtrics response export: %s", exc)
+        else:
+            with open(fn, mode='wb') as localfile:
+                localfile.write(response.content)
+            break
+
+        if time.monotonic() >= deadline:
+            raise TimeoutError("Timed out downloading the Qualtrics response export")
+        time.sleep(time_sleep)
+
+    data = pyreadstat.read_sav(fn, apply_value_formats=False)[0]
     return data
 
 def GetDataFromQualServer():
@@ -358,9 +332,6 @@ def ExtractData100(data, showList, firsttimeList, d100Init):
 
 def ExtractDataNot100(data, showList, firsttimeList, dNot100Init):
     dNot100=copy.deepcopy(dNot100Init)
-    numValid = SampleSize(data, showList, firsttimeList)
-    # maxNumValid = 0
-    # print("numvalid", numValid)
     for thisBarItem, thisBarAttr in dNot100Init.items():
         for thisVar in thisBarAttr['varList']:
             # print(thisBarItem)
@@ -469,13 +440,13 @@ def WriteOneGroup2WorkSheet(ws, title, sampleSize, d1, dx1, startCol):
     ws.cell(rowdx+1, coldx).value=sampleSize
     ws.cell(rowdx+1, coldx+1).value="人"
     rowdx+=2
-    for key1, value1 in d1.items():
+    for value1 in d1.values():
         rowdx+=1
         coldx=startCol
         ws.cell(rowdx, coldx).value=value1['label']
         ws.cell(rowdx, coldx).alignment=xlAlignment(horizontal="left")
         ws.cell(rowdx, coldx).font=xlFont(bold=True, size=fontSizeTitle)
-        for key2, value2 in value1['optList'].items():
+        for value2 in value1['optList'].values():
             coldx+=1
             ws.cell(rowdx+1, coldx).value=value2['label']
             ws.cell(rowdx+1, coldx).alignment=xlAlignment(horizontal="center")
@@ -491,13 +462,13 @@ def WriteOneGroup2WorkSheet(ws, title, sampleSize, d1, dx1, startCol):
         rowdx+=4
 
     rowdx+=3
-    for key1, value1 in dx1.items():
+    for value1 in dx1.values():
         rowdx+=1
         coldx=startCol
         ws.cell(rowdx, coldx).value=value1['itemLabel']
         ws.cell(rowdx, coldx).alignment=xlAlignment(horizontal="left")
         ws.cell(rowdx, coldx).font=xlFont(bold=True, size=fontSizeTitle)
-        for key2, value2 in value1['varList'].items():
+        for value2 in value1['varList'].values():
             coldx+=1
             ws.cell(rowdx+1, coldx).value=value2['label']
             ws.cell(rowdx+1, coldx).alignment=xlAlignment(horizontal="center")
@@ -617,7 +588,7 @@ def CreatePpt(fn, title, showList, sampleSize, d1, dx1):
 
                 dataCategories=list()
                 dataSeries=list()
-                for k, v in data.items():
+                for v in data.values():
                     dataCategories.append(v['label'])
                     dataSeries.append(v['yesPct'])
                 # print(dataCategories)
@@ -729,9 +700,4 @@ def ExtractComment(data, showList, firsttimeList, varname):
             print(this_comment[1])
             non_empty_comment.append(this_comment)
     return non_empty_comment
-
-
-
-
-
 

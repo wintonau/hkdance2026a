@@ -1,11 +1,14 @@
 from dotenv import load_dotenv
 import os
+from pathlib import Path
 
 load_dotenv()
 
+APP_DIR = Path(__file__).resolve().parent
+
 config={}
 
-config['PATHSTATIC']='./static/'
+config['PATHSTATIC']=str(APP_DIR / 'static') + os.sep
 config['QUALTRICS_DATAFILE_ONLINE']=config['PATHSTATIC']+"HKDANCE2026-online.sav"
 config['QUALTRICS_DATAFILE_PAPER']=config['PATHSTATIC']+"HKDANCE2026-paper.sav"
 config['HKDANCEDATAJSON']=config['PATHSTATIC']+'HKDANCE2026Data.json'
@@ -16,7 +19,7 @@ config['SUMMARYDATAEXCELFILE']=config['PATHSTATIC']+'HKDANCE2026-圖表數據.xl
 config['COMMENTFILE']=config['PATHSTATIC']+'HKDANCE2026-觀眾意見.docx'
 config['HKDANCEPPTTEMPLATE']=config['PATHSTATIC']+'hkdance2026_template.pptx'
 
-config['PATHTEMPLATE']='./templates/'
+config['PATHTEMPLATE']=str(APP_DIR / 'templates') + os.sep
 config['RENDEREDHTMLFILENAME']=config['PATHTEMPLATE']+'rendered.html'
 config['HKDANCECHARTTEMPLATE']='hkdanceChartTemplate.html'
 config['HKDANCEADMINTEMPLATE']='hkdanceAdmin.html'
@@ -34,6 +37,5 @@ config['SULOGIN']=os.getenv('SULOGIN')
 config['SUPASSWORD']=os.getenv('SUPASSWORD')
 config['ADMINLOGIN']=os.getenv('ADMINLOGIN')
 config['ADMINPASSWORD']=os.getenv('ADMINPASSWORD')
-
 
 
